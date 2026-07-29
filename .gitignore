@@ -1,38 +1,114 @@
 ```
-# Logs and temp files
-*.log
-*.tmp
-
-# Database files
-*.db
-
-# Environment files
-.env
-.env.local
-*.env.*
-
-# Dependencies
-.venv/
-venv/
-node_modules/
-
-# Python specific
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 .Python
+env/
+venv/
+.venv/
+.ENV
+.venv.bak/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
 *.so
 *.egg-info/
 .eggs/
+.eggs.bak/
+.python-version
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
 
-# Editors
+# Django/Flask specific
+*.db
+*.sqlite
+*.sqlite3
+media/
+staticfiles/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Web
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.dev
+.env.development
+.env.prod
+.env.production
+.env.staging
+.env.test
+.env.testing
+.env.backup
+.env.example
+
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Build and distribution
+dist/
+build/
+*.tar.gz
+*.whl
+*.egg
+*.zip
+target/
+.gradle/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+log/
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+.coverage.*
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*~
 
 # OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 ```
