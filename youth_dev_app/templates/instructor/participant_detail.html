@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle de Participante - YouthDev{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('instructor_dashboard') }}">Dashboard</a></li>
+                <li class="breadcrumb-item active">{{ participant.full_name }}</li>
+            </ol>
+        </nav>
+        
+        <h2 class="text-primary">
+            <i class="fas fa-user-graduate"></i> {{ participant.full_name }}
+        </h2>
+        <p class="text-muted">{{ participant.email }}</p>
+        
+        {% if profile.selected_role %}
+        <span class="badge bg-primary fs-6">
+            Rol de Interés: {{ profile.selected_role|replace('_', ' ')|title }}
+        </span>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Metas y Sueños -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-dream"></i> 🎯 Metas y Sueños del Participante</h5>
+            </div>
+            <div class="card-body">
+                {% if profile.dreams %}
+                <div class="mb-3">
+                    <h6 class="fw-bold">✨ Sueños:</h6>
+                    <p class="bg-light p-3 rounded">{{ profile.dreams }}</p>
+                </div>
+                {% endif %}
+                
+                {% if profile.personal_goals %}
+                <div class="mb-3">
+                    <h6 class="fw-bold">🎯 Metas Personales:</h6>
+                    <p class="bg-light p-3 rounded">{{ profile.personal_goals }}</p>
+                </div>
+                {% endif %}
+                
+                {% if profile.development_goals %}
+                <div class="mb-3">
+                    <h6 class="fw-bold">🚀 Metas de Desarrollo:</h6>
+                    <p class="bg-light p-3 rounded">{{ profile.development_goals }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Resultados del Test -->
+{% if test_results %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fas fa-chart-bar"></i> 📊 Resultados del Test</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Competencia</th>
+                                <th>Puntaje</th>
+                                <th>Nivel</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for comp_id, result in test_results.items() %}
+                            {% set comp_name = questions|selectattr('id', 'equalto', comp_id)|map(attribute='name')|first %}
+                            <tr>
+                                <td>{{ comp_name or comp_id }}</td>
+                                <td>
+                                    <div class="progress" style="width: 150px;">
+                                        <div class="progress-bar" role="progressbar" 
+                                             style="width: {{ (result.score / 5 * 100)|int }}%;">
+                                            {{ result.score }}/5
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge {% if result.level == 'B' %}bg-danger{% elif result.level == 'I' %}bg-primary{% elif result.level == 'A' %}bg-info{% else %}bg-success{% endif %}">
+                                        {{ result.level }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% if result.level in ['A', 'E'] %}
+                                        <span class="text-success"><i class="fas fa-check"></i> Óptimo</span>
+                                    {% elif result.level == 'I' %}
+                                        <span class="text-warning"><i class="fas fa-exclamation"></i> Regular</span>
+                                    {% else %}
+                                        <span class="text-danger"><i class="fas fa-times"></i> Bajo</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Análisis de Brechas -->
+{% if gap_analysis.gaps %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow-sm border-warning">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0"><i class="fas fa-arrow-up"></i> Áreas que Necesitan Mejora</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Competencia</th>
+                                <th>Nivel Actual</th>
+                                <th>Nivel Requerido</th>
+                                <th>Brecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for gap in gap_analysis.gaps %}
+                            <tr>
+                                <td><strong>{{ gap.competency }}</strong></td>
+                                <td>{{ gap.current }}</td>
+                                <td>{{ gap.required }}</td>
+                                <td>
+                                    {% for i in range(gap.gap) %}
+                                        <i class="fas fa-arrow-up text-danger"></i>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if gap_analysis.strengths %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow-sm border-success">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fas fa-star"></i> Fortalezas Detectadas</h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <i class="fas fa-lightbulb"></i>
+                    <strong>Sugerencia:</strong> El participante tiene habilidades naturales en estas competencias.
+                    Podría considerar roles que las requieran como fortaleza principal.
+                </div>
+                <div class="row g-3">
+                    {% for strength in gap_analysis.strengths %}
+                    <div class="col-md-4">
+                        <div class="d-flex align-items-center p-3 bg-light rounded">
+                            <div class="display-6 me-3">💪</div>
+                            <div>
+                                <strong>{{ strength.competency }}</strong>
+                                <br>
+                                <span class="badge bg-success">{{ strength.level }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Recomendaciones -->
+{% if recommendations %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0"><i class="fas fa-compass"></i> 💡 Recomendaciones para el Participante</h5>
+            </div>
+            <div class="card-body">
+                <p class="lead">Recursos sugeridos para fortalecer las competencias detectadas:</p>
+                <div class="row g-3">
+                    {% for rec in recommendations %}
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h6 class="fw-bold">{{ rec.title }}</h6>
+                                <p class="small text-muted mb-2">{{ rec.description }}</p>
+                                <div class="alert alert-light border py-2 mb-2">
+                                    <strong>Objetivo:</strong> {{ rec.objective }}
+                                </div>
+                                <span class="badge {% if rec.resource_type == 'web' %}bg-primary{% elif rec.resource_type == 'app' %}bg-success{% elif rec.resource_type == 'video' %}bg-danger{% else %}bg-info{% endif %}">
+                                    {{ rec.resource_type }}
+                                </span>
+                                {% if rec.url and rec.url != '#' %}
+                                <a href="{{ rec.url }}" target="_blank" class="btn btn-outline-primary btn-sm float-end">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="text-center mt-4">
+    <a href="{{ url_for('instructor_dashboard') }}" class="btn btn-outline-secondary btn-lg">
+        <i class="fas fa-arrow-left"></i> Volver al Dashboard
+    </a>
+</div>
+{% endblock %}
+
+{% set questions = COMPETENCY_QUESTIONS %}

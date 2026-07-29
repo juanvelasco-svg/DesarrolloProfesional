@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard Instructor - YouthDev{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4 text-primary">
+            <i class="fas fa-chalkboard-teacher"></i> 👨‍🏫 Panel del Instructor
+        </h2>
+        
+        <div class="alert alert-info mb-4">
+            <strong><i class="fas fa-users"></i> Participantes Asignados:</strong>
+            {{ participants|length }} jóvenes están bajo tu mentoría
+        </div>
+    </div>
+</div>
+
+{% if participants %}
+<div class="row g-4">
+    {% for participant in participants %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">{{ participant.name }}</h5>
+                {% if participant.role %}
+                    <span class="badge bg-primary">{{ participant.role|replace('_', ' ')|title }}</span>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <p class="text-muted small mb-3">
+                    <i class="fas fa-envelope"></i> {{ participant.email }}
+                </p>
+                
+                <h6 class="fw-bold">Progreso:</h6>
+                <div class="mb-3">
+                    <div class="progress" style="height: 25px;">
+                        {% set progress_count = [participant.has_profile, participant.has_test, participant.has_analysis]|select('true')|list|length %}
+                        {% set progress_percent = (progress_count / 3 * 100)|int %}
+                        <div class="progress-bar {% if progress_percent == 100 %}bg-success{% elif progress_percent >= 50 %}bg-warning{% else %}bg-danger{% endif %}" 
+                             role="progressbar" 
+                             style="width: {{ progress_percent }}%;"
+                             aria-valuenow="{{ progress_percent }}" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100">
+                            {{ progress_percent }}%
+                        </div>
+                    </div>
+                    <small class="text-muted">
+                        {% if participant.has_profile %}✅ Metas{% else %}⬜ Metas{% endif %} |
+                        {% if participant.has_test %}✅ Test{% else %}⬜ Test{% endif %} |
+                        {% if participant.has_analysis %}✅ Análisis{% else %}⬜ Análisis{% endif %}
+                    </small>
+                </div>
+                
+                {% if participant.gaps and participant.gaps|length > 0 %}
+                <h6 class="fw-bold text-warning">
+                    <i class="fas fa-arrow-up"></i> Áreas de Mejora ({{ participant.gaps|length }})
+                </h6>
+                <ul class="list-unstyled small">
+                    {% for gap in participant.gaps[:3] %}
+                    <li class="mb-1">
+                        <span class="badge bg-light text-dark border">{{ gap.competency }}</span>
+                        <small class="text-muted">
+                            {{ gap.current }} → {{ gap.required }}
+                        </small>
+                    </li>
+                    {% endfor %}
+                    {% if participant.gaps|length > 3 %}
+                    <li class="text-muted fst-italic">+ {{ participant.gaps|length - 3 }} más...</li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+                
+                {% if participant.recommendations and participant.recommendations|length > 0 %}
+                <h6 class="fw-bold text-success mt-3">
+                    <i class="fas fa-compass"></i> Recomendaciones ({{ participant.recommendations|length }})
+                </h6>
+                <ul class="list-unstyled small">
+                    {% for rec in participant.recommendations[:2] %}
+                    <li class="mb-1">
+                        <span class="badge {% if rec.resource_type == 'web' %}bg-primary{% elif rec.resource_type == 'app' %}bg-success{% elif rec.resource_type == 'video' %}bg-danger{% else %}bg-info{% endif %}">
+                            {{ rec.resource_type }}
+                        </span>
+                        {{ rec.title }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('instructor_participant_detail', participant_id=participant.id) }}" 
+                   class="btn btn-primary btn-sm w-100">
+                    <i class="fas fa-eye"></i> Ver Detalles Completos
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="row">
+    <div class="col-12">
+        <div class="card bg-light">
+            <div class="card-body text-center p-5">
+                <div class="display-1 mb-3">👥</div>
+                <h3>No tienes participantes asignados</h3>
+                <p class="lead text-muted">Cuando un participante te seleccione como instructor, aparecerá aquí.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

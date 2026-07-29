@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}Análisis de Resultados - YouthDev{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4 text-primary">
+            <i class="fas fa-chart-line"></i> 📊 Tu Análisis de Competencias
+        </h2>
+        
+        <div class="alert alert-success mb-4">
+            <strong><i class="fas fa-check-circle"></i> ¡Completado!</strong>
+            Hemos comparado tus resultados con los requerimientos del rol: 
+            <strong>{{ role }}</strong>
+        </div>
+    </div>
+</div>
+
+<!-- Fortalezas -->
+{% if strengths %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card border-success shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0"><i class="fas fa-star"></i> ¡Tus Fortalezas!</h4>
+            </div>
+            <div class="card-body">
+                <p class="lead">Estas competencias ya las tienes desarrolladas al nivel requerido o superior:</p>
+                <div class="row g-3">
+                    {% for strength in strengths %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="d-flex align-items-center p-3 bg-light rounded">
+                            <div class="display-6 me-3">💪</div>
+                            <div>
+                                <strong>{{ strength.competency }}</strong>
+                                <br>
+                                <span class="badge bg-success">{{ strength.level }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="alert alert-info mt-3 mb-0">
+                    <i class="fas fa-lightbulb"></i> 
+                    <strong>Sugerencia:</strong> Podrías considerar roles que requieran estas fortalezas, 
+                    ya que tienes habilidades naturales en estas áreas!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Áreas de Mejora -->
+{% if gaps %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card border-warning shadow-sm">
+            <div class="card-header bg-warning text-dark">
+                <h4 class="mb-0"><i class="fas fa-arrow-up"></i> Áreas para Mejorar</h4>
+            </div>
+            <div class="card-body">
+                <p class="lead">Estas son las competencias donde necesitas desarrollar más habilidades:</p>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Competencia</th>
+                                <th>Tu Nivel</th>
+                                <th>Nivel Requerido</th>
+                                <th>Brecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for gap in gaps %}
+                            <tr>
+                                <td><strong>{{ gap.competency }}</strong></td>
+                                <td>
+                                    <span class="badge {% if gap.current == 'B' %}bg-danger{% elif gap.current == 'I' %}bg-warning{% elif gap.current == 'A' %}bg-info{% else %}bg-success{% endif %}">
+                                        {{ gap.current }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge {% if gap.required == 'B' %}bg-secondary{% elif gap.required == 'I' %}bg-primary{% elif gap.required == 'A' %}bg-info{% else %}bg-success{% endif %}">
+                                        {{ gap.required }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% for i in range(gap.gap) %}
+                                        <i class="fas fa-arrow-up text-danger"></i>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-4">
+                    <a href="{{ url_for('participant_recommendations') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-compass"></i> Ver Recomendaciones Personalizadas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="row">
+    <div class="col-12">
+        <div class="card bg-success text-white">
+            <div class="card-body text-center p-5">
+                <div class="display-1 mb-3">🎉</div>
+                <h3>¡Felicidades!</h3>
+                <p class="lead">Tienes todas las competencias al nivel requerido para este rol.</p>
+                <a href="{{ url_for('participant_recommendations') }}" class="btn btn-light btn-lg">
+                    <i class="fas fa-compass"></i> Ver Recursos de Mantenimiento
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Leyenda de Niveles -->
+<div class="card mt-4">
+    <div class="card-body">
+        <h5><i class="fas fa-key"></i> Leyenda de Niveles:</h5>
+        <div class="row text-center">
+            <div class="col">
+                <span class="badge bg-danger">B</span>
+                <br><small>Básico</small>
+            </div>
+            <div class="col">
+                <span class="badge bg-primary">I</span>
+                <br><small>Intermedio</small>
+            </div>
+            <div class="col">
+                <span class="badge bg-info">A</span>
+                <br><small>Avanzado</small>
+            </div>
+            <div class="col">
+                <span class="badge bg-success">E</span>
+                <br><small>Estratégico</small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

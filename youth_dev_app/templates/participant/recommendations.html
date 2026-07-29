@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Recomendaciones - YouthDev{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4 text-primary">
+            <i class="fas fa-compass"></i> 💡 Tus Recomendaciones Personalizadas
+        </h2>
+        
+        <div class="alert alert-info mb-4">
+            <strong><i class="fas fa-lightbulb"></i> Recursos seleccionados para ti!</strong>
+            Basado en tus áreas de mejora, hemos encontrado estos recursos para ayudarte a desarrollar tus competencias.
+        </div>
+    </div>
+</div>
+
+{% if recommendations %}
+<div class="row g-4">
+    {% for rec in recommendations %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm hover-card">
+            <div class="card-header {% if rec.resource_type == 'web' %}bg-primary{% elif rec.resource_type == 'app' %}bg-success{% elif rec.resource_type == 'video' %}bg-danger{% else %}bg-info{% endif %} text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span>
+                        {% if rec.resource_type == 'web' %}
+                            <i class="fas fa-globe"></i> Página Web
+                        {% elif rec.resource_type == 'app' %}
+                            <i class="fas fa-mobile-alt"></i> Aplicación
+                        {% elif rec.resource_type == 'video' %}
+                            <i class="fas fa-video"></i> Video
+                        {% else %}
+                            <i class="fas fa-briefcase"></i> Oportunidad Laboral
+                        {% endif %}
+                    </span>
+                    <small>{{ rec.competency }}</small>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ rec.title }}</h5>
+                <p class="card-text text-muted">{{ rec.description }}</p>
+                
+                <div class="alert alert-light border">
+                    <strong><i class="fas fa-bullseye"></i> Objetivo:</strong>
+                    <br>{{ rec.objective }}
+                </div>
+                
+                {% if rec.url and rec.url != '#' %}
+                <a href="{{ rec.url }}" target="_blank" class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-external-link-alt"></i> Visitar Recurso
+                </a>
+                {% else %}
+                <button class="btn btn-outline-secondary btn-sm" disabled>
+                    <i class="fas fa-lock"></i> Próximamente
+                </button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="row">
+    <div class="col-12">
+        <div class="card bg-light">
+            <div class="card-body text-center p-5">
+                <div class="display-1 mb-3">🎯</div>
+                <h3>¡Excelente trabajo!</h3>
+                <p class="lead">No se detectaron brechas significativas en tus competencias.</p>
+                <p>Sigue desarrollándote y manteniendo tus habilidades actuales.</p>
+                <hr>
+                <h5 class="mt-4">Recursos Generales Recomendados:</h5>
+                <div class="row g-3 mt-2">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6><i class="fas fa-book"></i> Lecturas</h6>
+                                <small>Libros sobre desarrollo personal y profesional</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6><i class="fas fa-users"></i> Networking</h6>
+                                <small>Eventos y comunidades profesionales</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6><i class="fas fa-chalkboard-teacher"></i> Mentoría</h6>
+                                <small>Busca un mentor en tu área de interés</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card bg-gradient text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <div class="card-body text-center">
+                <h4><i class="fas fa-trophy"></i> ¡Sigue Adelante!</h4>
+                <p class="mb-0">El desarrollo personal es un viaje continuo. Revisa estas recomendaciones regularmente y trabaja en tu crecimiento.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a href="{{ url_for('participant_dashboard') }}" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left"></i> Volver al Dashboard
+    </a>
+</div>
+{% endblock %}
