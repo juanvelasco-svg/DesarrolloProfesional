@@ -1,0 +1,111 @@
+/* Styles for YouthDev 2026 */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.bg-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+.rounded-4 {
+    border-radius: 1rem !important;
+}
+
+.navbar {
+    backdrop-filter: blur(10px);
+}
+
+.content-page {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.competency-card {
+    border-left: 4px solid;
+}
+
+.competency-card.low {
+    border-left-color: #dc3545;
+    background-color: #fff5f5;
+}
+
+.competency-card.medium {
+    border-left-color: #ffc107;
+    background-color: #fffdf5;
+}
+
+.competency-card.high {
+    border-left-color: #28a745;
+    background-color: #f5fff9;
+}
+
+#radarChartContainer {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.recommendation-card {
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.recommendation-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.badge-role {
+    font-size: 0.9rem;
+    padding: 0.5em 1em;
+}
+
+.table-responsive {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1.5rem !important;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.25rem;
+    }
+}

@@ -1,38 +1,47 @@
 ```
-# Logs and temp files
-*.log
-*.tmp
+# Dependencies
+youth_dev_app/
 
-# Database files
-*.db
-
-# Environment files
+# Environment
 .env
 .env.local
-*.env.*
+.env.*
 
-# Dependencies
-.venv/
-venv/
-node_modules/
+# Logs
+*.log
 
-# Python specific
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 .Python
 *.so
-*.egg-info/
-.eggs/
 
-# Editors
-.vscode/
-.idea/
-*.swp
-*.swo
+# Build artifacts
+dist/
+build/
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.out
 
-# OS generated files
+# Coverage
+.coverage
+coverage/
+htmlcov/
+
+# OS
 .DS_Store
 Thumbs.db
 ```
