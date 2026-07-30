@@ -15,11 +15,7 @@ const DB = {
         // Initialize default users if not exists
         if (!localStorage.getItem('users')) {
             const defaultUsers = [
-                { id: 1, username: 'admin', password: 'admin123', fullName: 'Administrador', role: 'admin' },
-                { id: 2, username: 'instructor1', password: 'inst123', fullName: 'Carlos Mendoza', role: 'instructor' },
-                { id: 3, username: 'instructor2', password: 'inst123', fullName: 'Ana Rodríguez', role: 'instructor' },
-                { id: 4, username: 'participa1', password: 'part123', fullName: 'Juan Pérez', role: 'participante' },
-                { id: 5, username: 'participa2', password: 'part123', fullName: 'María García', role: 'participante' }
+                { id: 1, username: 'admin', password: 'admin123', fullName: 'Administrador', role: 'admin' }
             ];
             this.setUsers(defaultUsers);
         }
@@ -337,6 +333,21 @@ function setupEventListeners() {
     // Login form
     document.getElementById('loginForm').addEventListener('submit', handleLogin);
     
+    // Register form
+    document.getElementById('registerForm').addEventListener('submit', handleRegister);
+    
+    // Go to register page
+    document.getElementById('goToRegisterBtn')?.addEventListener('click', () => {
+        document.getElementById('loginPage').classList.add('d-none');
+        document.getElementById('registerPage').classList.remove('d-none');
+    });
+    
+    // Go to login page
+    document.getElementById('goToLoginBtn')?.addEventListener('click', () => {
+        document.getElementById('registerPage').classList.add('d-none');
+        document.getElementById('loginPage').classList.remove('d-none');
+    });
+    
     // Logout
     document.getElementById('logoutBtn').addEventListener('click', handleLogout);
     
@@ -359,6 +370,13 @@ function setupEventListeners() {
     
     // Admin: Clear data
     document.getElementById('clearDataBtn').addEventListener('click', clearDatabase);
+    
+    // Load edit participants modal when it's shown
+    document.getElementById('editParticipantModal')?.addEventListener('show.bs.modal', function() {
+        if (typeof window.loadEditParticipantsModal === 'function') {
+            window.loadEditParticipantsModal();
+        }
+    });
 }
 
 function handleLogin(e) {
@@ -366,38 +384,72 @@ function handleLogin(e) {
     
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    const role = document.getElementById('role').value;
     
     const users = DB.getUsers();
-    const user = users.find(u => u.username === username && u.password === password && u.role === role);
+    const user = users.find(u => u.username === username && u.password === password);
     
     if (user) {
         currentUser = user;
-        currentRole = role;
+        currentRole = user.role;
         
         document.getElementById('loginPage').classList.add('d-none');
         document.getElementById('mainApp').classList.remove('d-none');
         document.getElementById('userName').textContent = user.fullName;
         
         // Setup navigation based on role
-        document.getElementById('participantNav').style.display = role === 'participante' ? 'flex' : 'none';
-        document.getElementById('instructorNav').style.display = role === 'instructor' ? 'flex' : 'none';
-        document.getElementById('adminNav').style.display = role === 'admin' ? 'flex' : 'none';
+        document.getElementById('participantNav').style.display = user.role === 'participante' ? 'flex' : 'none';
+        document.getElementById('instructorNav').style.display = user.role === 'instructor' ? 'flex' : 'none';
+        document.getElementById('adminNav').style.display = user.role === 'admin' ? 'flex' : 'none';
         
         // Load appropriate page
-        if (role === 'participante') {
+        if (user.role === 'participante') {
             navigateTo('goals');
             loadInstructors();
-        } else if (role === 'instructor') {
+        } else if (user.role === 'instructor') {
             navigateTo('instructor-dashboard');
             loadInstructorDashboard();
-        } else if (role === 'admin') {
+        } else if (user.role === 'admin') {
             navigateTo('admin-dashboard');
             loadAdminDashboard();
         }
     } else {
         alert('❌ Credenciales incorrectas. Intenta de nuevo.');
     }
+}
+
+function handleRegister(e) {
+    e.preventDefault();
+    
+    const username = document.getElementById('regUsername').value;
+    const password = document.getElementById('regPassword').value;
+    const fullName = document.getElementById('regFullName').value;
+    const role = document.getElementById('regRole').value;
+    
+    const users = DB.getUsers();
+    
+    // Check if username already exists
+    if (users.find(u => u.username === username)) {
+        alert('⚠️ El nombre de usuario ya existe. Por favor elige otro.');
+        return;
+    }
+    
+    const newUser = {
+        id: Math.max(...users.map(u => u.id), 0) + 1,
+        username: username,
+        password: password,
+        fullName: fullName,
+        role: role
+    };
+    
+    users.push(newUser);
+    DB.setUsers(users);
+    
+    alert('✅ Usuario registrado exitosamente. Ahora puedes iniciar sesión.');
+    
+    // Go back to login page
+    document.getElementById('registerPage').classList.add('d-none');
+    document.getElementById('loginPage').classList.remove('d-none');
+    document.getElementById('registerForm').reset();
 }
 
 function handleLogout() {
@@ -804,19 +856,27 @@ function loadInstructorDashboard() {
     const results = DB.getResults();
     const users = DB.getUsers();
     
-    const myParticipants = profiles.filter(p => p.selectedInstructor == currentUser.id);
+    // Get all participants (users with role 'participante')
+    const allParticipants = users.filter(u => u.role === 'participante');
     
     const tbody = document.getElementById('participantsTable');
     tbody.innerHTML = '';
     
-    if (myParticipants.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="text-center">No tienes participantes asignados</td></tr>';
+    if (allParticipants.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" class="text-center">No hay participantes registrados</td></tr>';
         return;
     }
     
-    myParticipants.forEach(profile => {
-        const participant = users.find(u => u.id === profile.userId);
-        const result = results.find(r => r.userId === profile.userId);
+    allParticipants.forEach(participant => {
+        const profile = profiles.find(p => p.userId === participant.id);
+        const result = results.find(r => r.userId === participant.id);
+        
+        // Find the instructor assigned to this participant
+        let instructorName = 'Sin asignar';
+        if (profile && profile.selectedInstructor) {
+            const instructor = users.find(u => u.id == profile.selectedInstructor);
+            instructorName = instructor ? instructor.fullName : 'Sin asignar';
+        }
         
         const row = document.createElement('tr');
         
@@ -842,8 +902,9 @@ function loadInstructorDashboard() {
         
         row.innerHTML = `
             <td>${participant?.fullName || 'N/A'}</td>
-            <td>${MATRIX_2_2[profile.selectedRole]?.emoji || ''} ${MATRIX_2_2[profile.selectedRole]?.name || profile.selectedRole || 'No definido'}</td>
-            <td><small>${profile.lifeGoals.substring(0, 50)}...</small></td>
+            <td>${MATRIX_2_2[profile?.selectedRole]?.emoji || ''} ${MATRIX_2_2[profile?.selectedRole]?.name || profile?.selectedRole || 'No definido'}</td>
+            <td>${instructorName}</td>
+            <td><small>${profile?.lifeGoals ? profile.lifeGoals.substring(0, 30) + '...' : '-'}</small></td>
             <td>${strengths}</td>
             <td class="text-danger">${improvements}</td>
             <td>${recommendations}</td>
@@ -855,9 +916,92 @@ function loadInstructorDashboard() {
     });
 }
 
-function viewParticipantDetails(userId) {
-    alert('Funcionalidad de detalle en desarrollo');
-}
+// Make function globally available for onclick handlers
+window.loadEditParticipantsModal = function() {
+    const profiles = DB.getProfiles();
+    const users = DB.getUsers();
+    const instructors = users.filter(u => u.role === 'instructor');
+    const participants = users.filter(u => u.role === 'participante');
+    
+    const tbody = document.getElementById('editParticipantsTable');
+    tbody.innerHTML = '';
+    
+    if (participants.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" class="text-center">No hay participantes registrados</td></tr>';
+        return;
+    }
+    
+    participants.forEach(participant => {
+        const profile = profiles.find(p => p.userId === participant.id);
+        let currentInstructorId = profile?.selectedInstructor || '';
+        let currentInstructorName = 'Sin asignar';
+        
+        if (currentInstructorId) {
+            const instructor = users.find(u => u.id == currentInstructorId);
+            currentInstructorName = instructor ? instructor.fullName : 'Sin asignar';
+        }
+        
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${participant.fullName}</td>
+            <td id="current-inst-${participant.id}">${currentInstructorName}</td>
+            <td>
+                <select class="form-select form-select-sm" id="new-inst-${participant.id}">
+                    <option value="">Sin asignar</option>
+                    ${instructors.map(inst => `<option value="${inst.id}" ${inst.id == currentInstructorId ? 'selected' : ''}>${inst.fullName}</option>`).join('')}
+                </select>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-primary" onclick="updateParticipantInstructor(${participant.id})">💾 Guardar</button>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+};
+
+// Make function globally available for onclick handlers
+window.updateParticipantInstructor = function(participantId) {
+    const newInstructorId = document.getElementById(`new-inst-${participantId}`).value;
+    
+    const profiles = DB.getProfiles();
+    const profileIndex = profiles.findIndex(p => p.userId === participantId);
+    
+    if (profileIndex >= 0) {
+        profiles[profileIndex].selectedInstructor = newInstructorId || '';
+        DB.setProfiles(profiles);
+        
+        // Update the display
+        const users = DB.getUsers();
+        const participant = users.find(u => u.id === participantId);
+        let newInstructorName = 'Sin asignar';
+        if (newInstructorId) {
+            const instructor = users.find(u => u.id == newInstructorId);
+            newInstructorName = instructor ? instructor.fullName : 'Sin asignar';
+        }
+        document.getElementById(`current-inst-${participantId}`).textContent = newInstructorName;
+        
+        alert('✅ Instructor actualizado exitosamente');
+        
+        // Refresh the main dashboard table
+        loadInstructorDashboard();
+    } else {
+        // Create a new profile if it doesn't exist
+        const newProfile = {
+            userId: participantId,
+            selectedInstructor: newInstructorId || '',
+            timestamp: new Date().toISOString()
+        };
+        profiles.push(newProfile);
+        DB.setProfiles(profiles);
+        
+        alert('✅ Instructor asignado exitosamente');
+        loadInstructorDashboard();
+    }
+};
+
+window.viewParticipantDetails = function(userId) {
+    alert('Funcionalidad de detalle en desarrollo para usuario ID: ' + userId);
+};
 
 function loadAdminDashboard() {
     const users = DB.getUsers();
