@@ -22,11 +22,13 @@ const DB = {
     }
 };
 
-// Matrix 2.2 - Roles and Competencies
+// Matrix 2.2 - Roles and Competencies with youth language
 const MATRIX_2_2 = {
     ALTA_GERENCIA: {
         name: 'Alta Gerencia',
         emoji: '👔',
+        youthName: 'El/La Jefe Máximo/a',
+        youthDescription: 'Mandas en toda la empresa, tomas las decisiones importantes y lideras equipos grandes',
         competencies: {
             cognitivas: 5, sociales: 5, eticas: 5, liderazgo: 5,
             crisis: 5, negociacion: 5, resiliencia: 5, emocional: 5, estrategico: 5
@@ -36,6 +38,8 @@ const MATRIX_2_2 = {
     EMPRENDEDOR: {
         name: 'Emprendedor',
         emoji: '💡',
+        youthName: 'El/La Emprende',
+        youthDescription: 'Creas tu propio negocio, innovas y haces realidad tus ideas locas',
         competencies: {
             cognitivas: 4, sociales: 4, eticas: 4, liderazgo: 4,
             crisis: 4, negociacion: 4, resiliencia: 5, emocional: 4, estrategico: 4
@@ -45,6 +49,8 @@ const MATRIX_2_2 = {
     INVESTIGADOR: {
         name: 'Investigador',
         emoji: '🔬',
+        youthName: 'El/La Científico/a',
+        youthDescription: 'Descubres cosas nuevas, investigas a fondo y eres un crack resolviendo misterios',
         competencies: {
             cognitivas: 5, sociales: 2, eticas: 4, liderazgo: 2,
             crisis: 2, negociacion: 2, resiliencia: 4, emocional: 4, estrategico: 5
@@ -54,6 +60,8 @@ const MATRIX_2_2 = {
     GESTION_PUBLICA: {
         name: 'Gestión Pública',
         emoji: '🏛️',
+        youthName: 'El/La Servidor/a Público',
+        youthDescription: 'Trabajas para el gobierno ayudando a la gente y mejorando tu comunidad',
         competencies: {
             cognitivas: 4, sociales: 4, eticas: 5, liderazgo: 4,
             crisis: 5, negociacion: 4, resiliencia: 4, emocional: 4, estrategico: 4
@@ -63,6 +71,8 @@ const MATRIX_2_2 = {
     EDUCACION: {
         name: 'Educación',
         emoji: '📚',
+        youthName: 'El/La Profe',
+        youthDescription: 'Enseñas a otros, compartes conocimiento y ayudas a crecer a más personas',
         competencies: {
             cognitivas: 4, sociales: 5, eticas: 4, liderazgo: 4,
             crisis: 2, negociacion: 4, resiliencia: 4, emocional: 4, estrategico: 2
@@ -72,6 +82,8 @@ const MATRIX_2_2 = {
     SALUD: {
         name: 'Salud',
         emoji: '🏥',
+        youthName: 'El/La Sanador/a',
+        youthDescription: 'Cuidas de la salud de las personas, salvas vidas y haces que otros se sientan mejor',
         competencies: {
             cognitivas: 5, sociales: 5, eticas: 4, liderazgo: 4,
             crisis: 5, negociacion: 2, resiliencia: 4, emocional: 4, estrategico: 2
@@ -81,6 +93,8 @@ const MATRIX_2_2 = {
     IMPACTO_SOCIAL: {
         name: 'Impacto Social',
         emoji: '🌍',
+        youthName: 'El/La Activista',
+        youthDescription: 'Luchas por un mundo mejor, ayudas a los demás y cambias la sociedad',
         competencies: {
             cognitivas: 2, sociales: 4, eticas: 5, liderazgo: 4,
             crisis: 4, negociacion: 4, resiliencia: 5, emocional: 4, estrategico: 2
@@ -90,11 +104,62 @@ const MATRIX_2_2 = {
     SOSTENIBILIDAD: {
         name: 'Sostenibilidad',
         emoji: '♻️',
+        youthName: 'El/La Eco-Guerrero/a',
+        youthDescription: 'Proteges el planeta, promueves el reciclaje y cuidas el medio ambiente',
         competencies: {
             cognitivas: 4, sociales: 4, eticas: 5, liderazgo: 2,
             crisis: 4, negociacion: 4, resiliencia: 4, emocional: 4, estrategico: 5
         },
         top3: ['Competencias Éticas', 'Análisis Estratégico', 'Competencias Cognitivas']
+    }
+};
+
+// Competencies with youth language
+const COMPETENCIES_YOUTH = {
+    cognitivas: {
+        name: 'Competencias Cognitivas',
+        youthName: '🧠 Tu Cerebro Potente',
+        youthDescription: 'Eres bueno/a pensando, analizando problemas y encontrando soluciones inteligentes'
+    },
+    sociales: {
+        name: 'Competencias Sociales',
+        youthName: '🤝 Tu Superpoder Social',
+        youthDescription: 'Te llevas bien con todos, sabes escuchar y te expresas de manera clara'
+    },
+    eticas: {
+        name: 'Competencias Éticas',
+        youthName: '⭐ Tu Brújula Moral',
+        youthDescription: 'Actúas con honestidad, respetas a los demás y haces lo correcto siempre'
+    },
+    liderazgo: {
+        name: 'Liderazgo',
+        youthName: '🚀 Tu Capacidad de Liderar',
+        youthDescription: 'Tomas la iniciativa, motivas a otros y guías al equipo hacia el éxito'
+    },
+    crisis: {
+        name: 'Manejo de Crisis',
+        youthName: '🔥 Tu Calma Bajo Presión',
+        youthDescription: 'Mantienes la calma cuando todo es un caos y tomas decisiones rápidas'
+    },
+    negociacion: {
+        name: 'Negociación',
+        youthName: '💬 Tu Habilidad para Negociar',
+        youthDescription: 'Logras acuerdos donde todos ganan y convences con buenos argumentos'
+    },
+    resiliencia: {
+        name: 'Resiliencia',
+        youthName: '💪 Tu Fuerza Interior',
+        youthDescription: 'Te levantas después de caer, aprendes de tus errores y no te rindes'
+    },
+    emocional: {
+        name: 'Equilibrio Emocional',
+        youthName: '😌 Tu Paz Interior',
+        youthDescription: 'Controlas tus emociones, manejas el estrés y mantienes el equilibrio'
+    },
+    estrategico: {
+        name: 'Análisis Estratégico',
+        youthName: '♟️ Tu Visión de Futuro',
+        youthDescription: 'Planeas a largo plazo, anticipas problemas y piensas como un estratega'
     }
 };
 
@@ -377,6 +442,13 @@ function setupEventListeners() {
             window.loadEditParticipantsModal();
         }
     });
+    
+    // Load edit users modal when it's shown (Admin)
+    document.getElementById('editUserModal')?.addEventListener('show.bs.modal', function() {
+        if (typeof window.loadEditUsersModal === 'function') {
+            window.loadEditUsersModal();
+        }
+    });
 }
 
 function handleLogin(e) {
@@ -508,17 +580,182 @@ function loadInstructors() {
         option.textContent = inst.fullName;
         select.appendChild(option);
     });
+    
+    // Load roles and competencies for the goals page
+    loadRolesAndCompetencies();
+}
+
+function loadRolesAndCompetencies() {
+    // Load roles selection
+    const rolesContainer = document.getElementById('rolesSelection');
+    if (rolesContainer) {
+        rolesContainer.innerHTML = '';
+        Object.keys(MATRIX_2_2).forEach(roleKey => {
+            const role = MATRIX_2_2[roleKey];
+            const col = document.createElement('div');
+            col.className = 'col-6 col-md-4';
+            col.innerHTML = `
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="${roleKey}" id="role_${roleKey}">
+                    <label class="form-check-label" for="role_${roleKey}">
+                        <strong>${role.emoji} ${role.youthName}</strong>
+                        <small class="d-block text-muted">${role.youthDescription}</small>
+                    </label>
+                </div>
+            `;
+            rolesContainer.appendChild(col);
+        });
+        
+        // Add event listeners for role checkboxes
+        document.querySelectorAll('.role-checkbox').forEach(cb => {
+            cb.addEventListener('change', function() {
+                const checked = document.querySelectorAll('.role-checkbox:checked');
+                if (checked.length > 3) {
+                    this.checked = false;
+                    alert('⚠️ Solo puedes seleccionar hasta 3 roles');
+                }
+                updateRolesCount();
+                updateRoleComparison();
+            });
+        });
+    }
+    
+    // Load competencies selection
+    const competenciesContainer = document.getElementById('competenciesSelection');
+    if (competenciesContainer) {
+        competenciesContainer.innerHTML = '';
+        Object.keys(COMPETENCIES_YOUTH).forEach(compKey => {
+            const comp = COMPETENCIES_YOUTH[compKey];
+            const col = document.createElement('div');
+            col.className = 'col-6 col-md-4';
+            col.innerHTML = `
+                <div class="form-check">
+                    <input class="form-check-input competency-checkbox" type="checkbox" value="${compKey}" id="comp_${compKey}">
+                    <label class="form-check-label" for="comp_${compKey}">
+                        <strong>${comp.youthName}</strong>
+                        <small class="d-block text-muted">${comp.youthDescription}</small>
+                    </label>
+                </div>
+            `;
+            competenciesContainer.appendChild(col);
+        });
+        
+        // Add event listeners for competency checkboxes
+        document.querySelectorAll('.competency-checkbox').forEach(cb => {
+            cb.addEventListener('change', function() {
+                const checked = document.querySelectorAll('.competency-checkbox:checked');
+                if (checked.length > 3) {
+                    this.checked = false;
+                    alert('⚠️ Solo puedes seleccionar hasta 3 competencias');
+                }
+                updateCompetenciesCount();
+                updateRoleComparison();
+            });
+        });
+    }
+}
+
+function updateRolesCount() {
+    const count = document.querySelectorAll('.role-checkbox:checked').length;
+    document.getElementById('rolesCount').textContent = count;
+}
+
+function updateCompetenciesCount() {
+    const count = document.querySelectorAll('.competency-checkbox:checked').length;
+    document.getElementById('competenciesCount').textContent = count;
+}
+
+function updateRoleComparison() {
+    const selectedRoles = Array.from(document.querySelectorAll('.role-checkbox:checked')).map(cb => cb.value);
+    const selectedCompetencies = Array.from(document.querySelectorAll('.competency-checkbox:checked')).map(cb => cb.value);
+    const comparisonDiv = document.getElementById('roleComparison');
+    const comparisonContent = document.getElementById('comparisonContent');
+    
+    if (selectedRoles.length === 0 || selectedCompetencies.length === 0) {
+        comparisonDiv.classList.add('d-none');
+        return;
+    }
+    
+    comparisonDiv.classList.remove('d-none');
+    let html = '<div class="row g-3">';
+    
+    selectedRoles.forEach(roleKey => {
+        const role = MATRIX_2_2[roleKey];
+        html += `
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h6>${role.emoji} ${role.youthName}</h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="small mb-2">${role.youthDescription}</p>
+                        <h6 class="fw-bold small">Competencias clave que necesita:</h6>
+                        <ul class="list-unstyled small">
+        `;
+        
+        // Get top competencies for this role
+        const sortedComps = Object.entries(role.competencies)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5);
+        
+        sortedComps.forEach(([compKey, level]) => {
+            const compYouth = COMPETENCIES_YOUTH[compKey];
+            const isSelected = selectedCompetencies.includes(compKey);
+            const matchClass = isSelected ? 'text-success fw-bold' : 'text-muted';
+            const matchIcon = isSelected ? '✅' : '⚠️';
+            html += `<li class="${matchClass}">${matchIcon} ${compYouth.youthName} (Nivel: ${level}/5)</li>`;
+        });
+        
+        html += '</ul></div></div></div>';
+    });
+    
+    html += '</div>';
+    
+    // Add summary
+    html += '<div class="mt-3 p-3 bg-warning rounded"><h6 class="fw-bold">💡 Tu situación actual:</h6><p class="small mb-1">Has seleccionado las competencias: <strong>' + 
+        selectedCompetencies.map(c => COMPETENCIES_YOUTH[c].youthName).join(', ') + '</strong></p>';
+    
+    // Check matches
+    let matchCount = 0;
+    selectedRoles.forEach(roleKey => {
+        const roleTopComps = Object.entries(MATRIX_2_2[roleKey].competencies)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 3)
+            .map(([k, _]) => k);
+        
+        selectedCompetencies.forEach(compKey => {
+            if (roleTopComps.includes(compKey)) {
+                matchCount++;
+            }
+        });
+    });
+    
+    if (matchCount > 0) {
+        html += `<p class="small text-success fw-bold mb-0">¡Genial! Tienes ${matchCount} coincidencias con los roles que te interesan. ¡Sigue desarrollándolas!</p>`;
+    } else {
+        html += `<p class="small text-danger mb-0">Para los roles que seleccionaste, deberías considerar desarrollar otras competencias. Revisa la tabla de arriba.</p>`;
+    }
+    
+    html += '</div>';
+    comparisonContent.innerHTML = html;
 }
 
 function handleGoalsSubmit(e) {
     e.preventDefault();
+    
+    // Get selected roles (up to 3)
+    const selectedRoles = Array.from(document.querySelectorAll('.role-checkbox:checked')).map(cb => cb.value);
+    
+    // Get selected competencies (up to 3)
+    const selectedCompetencies = Array.from(document.querySelectorAll('.competency-checkbox:checked')).map(cb => cb.value);
     
     const profile = {
         userId: currentUser.id,
         lifeGoals: document.getElementById('lifeGoals').value,
         passions: document.getElementById('passions').value,
         personalGoals: document.getElementById('personalGoals').value,
-        selectedRole: document.getElementById('selectedRole').value,
+        selectedRoles: selectedRoles,
+        selectedCompetencies: selectedCompetencies,
         selectedInstructor: document.getElementById('selectedInstructor').value,
         timestamp: new Date().toISOString()
     };
@@ -1003,6 +1240,62 @@ window.viewParticipantDetails = function(userId) {
     alert('Funcionalidad de detalle en desarrollo para usuario ID: ' + userId);
 };
 
+// Admin: Load edit users modal
+window.loadEditUsersModal = function() {
+    const users = DB.getUsers();
+    const tbody = document.getElementById('editUsersTable');
+    tbody.innerHTML = '';
+    
+    if (users.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center">No hay usuarios registrados</td></tr>';
+        return;
+    }
+    
+    users.forEach(user => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${user.id}</td>
+            <td>${user.username}</td>
+            <td>${user.fullName}</td>
+            <td><span class="badge bg-${user.role === 'admin' ? 'danger' : user.role === 'instructor' ? 'primary' : 'success'}">${user.role}</span></td>
+            <td>
+                <select class="form-select form-select-sm" id="new-role-${user.id}">
+                    <option value="participante" ${user.role === 'participante' ? 'selected' : ''}>Participante</option>
+                    <option value="instructor" ${user.role === 'instructor' ? 'selected' : ''}>Instructor</option>
+                    ${user.role !== 'admin' ? '<option value="admin">Administrador</option>' : ''}
+                </select>
+            </td>
+            <td>
+                ${user.role !== 'admin' ? `<button class="btn btn-sm btn-primary" onclick="updateUserRole(${user.id})">💾 Guardar</button>` : '-'}
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+};
+
+// Admin: Update user role
+window.updateUserRole = function(userId) {
+    const newRole = document.getElementById(`new-role-${userId}`).value;
+    
+    const users = DB.getUsers();
+    const userIndex = users.findIndex(u => u.id === userId);
+    
+    if (userIndex >= 0 && users[userIndex].role !== 'admin') {
+        users[userIndex].role = newRole;
+        DB.setUsers(users);
+        
+        alert('✅ Rol de usuario actualizado exitosamente');
+        
+        // Refresh the modal
+        loadEditUsersModal();
+        
+        // Refresh the main dashboard table
+        loadAdminDashboard();
+    } else {
+        alert('⚠️ No se puede modificar el rol de un administrador');
+    }
+};
+
 function loadAdminDashboard() {
     const users = DB.getUsers();
     const profiles = DB.getProfiles();
@@ -1023,11 +1316,76 @@ function loadAdminDashboard() {
             <td>${user.username}</td>
             <td><span class="badge bg-${user.role === 'admin' ? 'danger' : user.role === 'instructor' ? 'primary' : 'success'}">${user.role}</span></td>
             <td>
-                ${user.role !== 'admin' ? `<button class="btn btn-sm btn-danger" onclick="deleteUser(${user.id})">🗑️ Eliminar</button>` : '-'}
+                ${user.role !== 'admin' ? `<button class="btn btn-sm btn-warning" onclick="openEditUserModal(${user.id})">✏️ Editar</button> <button class="btn btn-sm btn-danger" onclick="deleteUser(${user.id})">🗑️ Eliminar</button>` : '-'}
             </td>
         `;
         tbody.appendChild(row);
     });
+}
+
+// Open edit user modal for specific user
+window.openEditUserModal = function(userId) {
+    const users = DB.getUsers();
+    const user = users.find(u => u.id === userId);
+    
+    if (!user || user.role === 'admin') {
+        alert('⚠️ No se puede editar este usuario');
+        return;
+    }
+    
+    document.getElementById('newUsername').value = user.username;
+    document.getElementById('newPassword').value = user.password;
+    document.getElementById('newFullName').value = user.fullName;
+    document.getElementById('newRole').value = user.role;
+    
+    // Store the user ID being edited
+    window.editingUserId = userId;
+    
+    const modal = new bootstrap.Modal(document.getElementById('addUserModal'));
+    modal.show();
+    
+    // Change modal title
+    document.querySelector('#addUserModal .modal-title').textContent = 'Editar Usuario';
+    
+    // Change form behavior
+    const form = document.getElementById('addUserForm');
+    
+    form.onsubmit = function(e) {
+        e.preventDefault();
+        handleEditUser();
+    };
+};
+
+function handleEditUser() {
+    if (!window.editingUserId) return;
+    
+    const users = DB.getUsers();
+    const userIndex = users.findIndex(u => u.id === window.editingUserId);
+    
+    if (userIndex >= 0 && users[userIndex].role !== 'admin') {
+        users[userIndex].username = document.getElementById('newUsername').value;
+        users[userIndex].password = document.getElementById('newPassword').value;
+        users[userIndex].fullName = document.getElementById('newFullName').value;
+        users[userIndex].role = document.getElementById('newRole').value;
+        
+        DB.setUsers(users);
+        
+        // Close modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('addUserModal'));
+        modal.hide();
+        
+        // Refresh dashboard
+        loadAdminDashboard();
+        
+        alert('✅ Usuario actualizado exitosamente');
+        
+        // Reset form and handlers
+        document.getElementById('addUserForm').reset();
+        document.getElementById('addUserForm').onsubmit = handleAddUser;
+        document.querySelector('#addUserModal .modal-title').textContent = 'Agregar Usuario';
+        
+        window.editingUserId = null;
+    }
 }
 
 function handleAddUser(e) {
