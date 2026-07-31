@@ -233,16 +233,19 @@ const TEST_QUESTIONS = [
 const RECOMMENDATIONS = {
     cognitivas: {
         webs: [
+            { name: 'Harvard Online - edX', url: 'https://harvardonline.harvard.edu/course/structure-function-argument-introduction-critical-thinking-0', objective: 'Introducción al pensamiento crítico (gratis sin certificado)' },
+            { name: 'Oxford Home Study', url: 'https://www.oxfordhomestudy.com/courses/online-management-courses/critical-thinking-free-online-course', objective: 'Pensamiento Critico' },
             { name: 'Coursera - Pensamiento Crítico', url: 'https://coursera.org', objective: 'Desarrollar habilidades de análisis crítico' },
             { name: 'Khan Academy', url: 'https://khanacademy.org', objective: 'Fortalecer razonamiento lógico-matemático' }
         ],
         apps: [
-            { name: 'BrainHQ', objective: 'Velocidad Mental y Atención' },
-            { name: 'CogniFit', objective: 'Retos Cognitivos' },
-            { name: 'Elevate', objective: 'Mejorar procesamiento mental' }
+            { name: 'BrainHQ', url: 'https://play.google.com/store/apps/details/BrainHQ?id=com.positscience.brainhq.app&hl=es_PE', objective: 'Velocidad Mental y Atención' },
+            { name: 'CogniFit', url: 'https://play.google.com/store/apps/details?id=com.cognifit.app&hl=es_PE', objective: 'Retos Cognitivos' },
+            { name: 'Elevate', url: 'https://play.google.com/store/apps/details?id=com.wonder&hl=es_PE', objective: 'Mejorar procesamiento mental' }
         ],
         videos: [
-            { name: 'TED - Cómo pensar críticamente', url: 'https://ted.com', objective: 'Inspirar pensamiento analítico' }
+            { name: 'TED - 5 consejos para mejorar su pensamiento crítico - Samantha Agoos', url: 'https://www.youtube.com/watch?v=YO4pwpaH8Fo', objective: 'Mejora tu análisis' },
+            { name: 'TED - Esta herramienta te ayudará a mejorar tu pensamiento crítico - Erick Wilberding', url: 'https://www.youtube.com/watch?v=7C3XUy3BYug', objective: 'Herramienta valiosa' }
         ],
         trabajos: [
             { name: 'Asistente de investigación', objective: 'Practicar análisis de datos' },
@@ -251,8 +254,10 @@ const RECOMMENDATIONS = {
     },
     sociales: {
         webs: [
-            { name: 'LinkedIn Learning - Comunicación', url: 'https://linkedin.com/learning', objective: 'Mejorar habilidades comunicativas' },
-            { name: 'Meetup', url: 'https://meetup.com', objective: 'Practicar networking social' }
+             { name: 'Harvard Online - edX', url: 'https://harvardonline.harvard.edu/program/leadership-and-communication', objective: 'Liderazgo y Comunicación (gratis sin certificado)' },
+            { name: 'LinkedIn Learning - Comunicación', url: 'https://es.linkedin.com/learning/topics/comunicacion', objective: 'Mejorar habilidades comunicativas' },
+            { name: 'Oxford Home Study', url: 'https://www.oxfordhomestudy.com/courses/customer-service-courses-online/free-communication-skills-courses', objective: 'Habilidades de Comunicación' },
+            { name: 'Meetup', url: 'https://meetup.com', objective: 'Practicar networking social (siempre se PRUDENTE)' }
         ],
         apps: [
             { name: 'Toastmasters International', objective: 'Desarrollar oratoria' },
