@@ -363,14 +363,14 @@ const RECOMMENDATIONS = {
     emocional: {
         webs: [
             { name: 'Greater Good Science Center', url: 'https://greatergood.berkeley.edu', objective: 'Ciencia del bienestar emocional' },
-            { name: 'Emotional Intelligence 2.0', url: 'https://talentsmart.com', objective: 'Desarrollar IE' }
+            { name: 'Salud y Bienestrar Mental', url: 'https://www.helpguide.org/es', objective: 'Desarrollar IE' }
         ],
         apps: [
-            { name: 'Daylio', objective: 'Diario emocional' },
-            { name: 'Sanvello', objective: 'Gestión de ansiedad y estrés' }
+            { name: 'Journey', url: 'https://journey.cloud/es/downloads', objective: 'Gestión de ansiedad y estrés' }
         ],
         videos: [
-            { name: 'TED - Inteligencia Emocional', url: 'https://ted.com', objective: 'Comprender y regular emociones' }
+            { name: 'TED - Inteligencia Emocional', url: 'https://www.youtube.com/watch?v=6IhuTOYCg-A', objective: 'Daniel Goleman' },
+            { name: 'TED - Inteligencia Emocional en el Trabajo', url: 'https://www.ted.com/talks/gabriel_rodriguez_gonzalez_la_inteligencia_emocional_en_el_trabajo', objective: 'Gabriel Rodriguez' }
         ],
         trabajos: [
             { name: 'Peer counselor', objective: 'Apoyo emocional a compañeros' },
@@ -379,15 +379,18 @@ const RECOMMENDATIONS = {
     },
     estrategico: {
         webs: [
-            { name: 'Strategic Thinking Institute', url: 'https://strategicthinkinginstitute.com', objective: 'Desarrollar pensamiento estratégico' },
-            { name: 'MIT OpenCourseWare - Strategy', url: 'https://ocw.mit.edu', objective: 'Estudiar estrategia formal' }
+            { name: 'Strategic Thinking Institute', url: 'https://www.strategyskills.com/', objective: 'Desarrollar pensamiento estratégico' },
+            { name: 'MIT OpenCourseWare - Advance Strategy', url: 'https://ocw.mit.edu/courses/15-963-advanced-strategy-spring-2008/', objective: 'Estrategia Avanzada' },
+            { name: 'MIT OpenCourseWare - Strategic Management', url: 'https://ocw.mit.edu/courses/15-902-strategic-management-i-fall-2006/', objective: 'Estudiar estrategia formal' },
+            { name: 'Harvard edX', url: 'https://www.edx.org/es/aprende/estrategia', objective: 'Cursos de estratégia' }
         ],
         apps: [
-            { name: 'Chess.com', objective: 'Desarrollar pensamiento táctico' },
-            { name: 'Strategy Games', objective: 'Practicar planificación a largo plazo' }
+            { name: 'Business strategy 2', url:'https://play.google.com/store/apps/details?id=com.DefaultCompany.businessstrategy2'; objective: 'Juegos de Negocios' },
+            { name: 'Business strategy 3', url:'https://play.google.com/store/apps/details?id=com.Izygames.BusinessStrategy3'; objective: 'Juegos de Negocios' },
+            { name: 'S', url: 'httimulación de Negociosps://www.simcompanies.com/', objective: 'Practicar planificación a largo plazo' }
         ],
         videos: [
-            { name: 'TED - Pensamiento sistémico', url: 'https://ted.com', objective: 'Ver el panorama completo' }
+            { name: 'TED - Pensamiento sistémico', url: 'hhttps://www.youtube.com/watch?v=ElVNiDis1DA', objective: 'Ver el panorama completo' }
         ],
         trabajos: [
             { name: 'Analista de datos junior', objective: 'Identificar patrones y tendencias' },
