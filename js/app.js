@@ -237,7 +237,8 @@ const RECOMMENDATIONS = {
             { name: 'Khan Academy', url: 'https://khanacademy.org', objective: 'Fortalecer razonamiento lógico-matemático' }
         ],
         apps: [
-            { name: 'Lumosity', objective: 'Entrenamiento cognitivo diario' },
+            { name: 'BrainHQ', objective: 'Velocidad Mental y Atención' },
+            { name: 'CogniFit', objective: 'Retos Cognitivos' },
             { name: 'Elevate', objective: 'Mejorar procesamiento mental' }
         ],
         videos: [
