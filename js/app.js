@@ -254,17 +254,17 @@ const RECOMMENDATIONS = {
     },
     sociales: {
         webs: [
-             { name: 'Harvard Online - edX', url: 'https://harvardonline.harvard.edu/program/leadership-and-communication', objective: 'Liderazgo y Comunicación (gratis sin certificado)' },
+            { name: 'Harvard Online - edX', url: 'https://harvardonline.harvard.edu/program/leadership-and-communication', objective: 'Liderazgo y Comunicación (gratis sin certificado)' },
             { name: 'LinkedIn Learning - Comunicación', url: 'https://es.linkedin.com/learning/topics/comunicacion', objective: 'Mejorar habilidades comunicativas' },
             { name: 'Oxford Home Study', url: 'https://www.oxfordhomestudy.com/courses/customer-service-courses-online/free-communication-skills-courses', objective: 'Habilidades de Comunicación' },
             { name: 'Meetup', url: 'https://meetup.com', objective: 'Practicar networking social (siempre se PRUDENTE)' }
         ],
         apps: [
-            { name: 'Toastmasters International', objective: 'Desarrollar oratoria' },
-            { name: 'Blinkist', objective: 'Aprender comunicación efectiva' }
+            { name: 'Habilidades Sociales', url: 'https://play.google.com/store/apps/details/Habilidades_Sociales?id=com.fasabeteam.habilidadessociales&hl=es_PE', objective: 'Conceptos Actuales' },
+            { name: 'Social Skills', url: 'https://play.google.com/store/apps/details?id=in.softecks.socialskills&hl=es_PE', objective: 'Aprendizaje Completo' }
         ],
         videos: [
-            { name: 'TED - El poder de la vulnerabilidad', url: 'https://ted.com', objective: 'Comprender conexión humana' }
+            { name: 'TED - El poder de la vulnerabilidad', url: 'https://www.ted.com/talks/brene_brown_the_power_of_vulnerability', objective: 'Comprender conexión humana' }
         ],
         trabajos: [
             { name: 'Voluntariado comunitario', objective: 'Practicar empatía y trabajo en equipo' },
@@ -273,14 +273,14 @@ const RECOMMENDATIONS = {
     },
     eticas: {
         webs: [
-            { name: 'edX - Ética Profesional', url: 'https://edx.org', objective: 'Estudiar fundamentos éticos' },
-            { name: 'Harvard Justice', url: 'https://justiceharvard.org', objective: 'Reflexionar sobre justicia moral' }
+            { name: 'Harvard - Centro de Ética', url: 'https://www.ethics.harvard.edu/what-practical-ethics', objective: 'Ética IA para Lideres de Negocios' },
+            { name: 'Harvard Justice', url: 'https://www.edx.org/learn/justice/harvard-university-justice', objective: 'Reflexionar sobre justicia moral (gratis como "Audit course"' }
         ],
         apps: [
-            { name: 'Philosophy Terms', objective: 'Aprender conceptos éticos' }
+            { name: 'Ethics', url: 'https://play.google.com/store/apps/details?id=com.sqstech.ethics&hl=es_PE',  objective: 'Aprender conceptos éticos' }
         ],
         videos: [
-            { name: 'Documental - The Social Dilemma', objective: 'Reflexionar sobre ética tecnológica' }
+            { name: 'Documental - The Social Dilemma', url: 'https://www.documaniatv.com/ciencia-y-tecnologia/redes-sociales-el-dilema-social-video_e125dff9a.html', objective: 'Reflexionar sobre ética tecnológica' }
         ],
         trabajos: [
             { name: 'Organización sin fines de lucro', objective: 'Servicio con propósito social' },
@@ -289,8 +289,10 @@ const RECOMMENDATIONS = {
     },
     liderazgo: {
         webs: [
-            { name: 'MindTools - Liderazgo', url: 'https://mindtools.com', objective: 'Aprender técnicas de liderazgo' },
-            { name: 'Harvard Business Review', url: 'https://hbr.org', objective: 'Estudiar casos de liderazgo' }
+            { name: 'BusinessBalls - Liderazgo y Gerencia', url: 'https://www.businessballs.com/', objective: 'Artículos ligeros de liderazgo' },
+            { name: 'Ejerciendo Liderazgo', url: 'https://harvardonline.harvard.edu/course/exercising-leadership-foundational-principles', objective: 'Principios Fundamentales' },
+            { name: 'Liderazgo sin temor', url: 'https://www.edx.org/learn/business-management/harvard-university-purpose-perspective-and-persuasion', objective: 'Proposito, Perspectiva y Persuación' },
+            { name: 'Oxford - Cualidades de Liderazgo', url: 'https://www.oxfordhomestudy.com/courses/leadership-courses-online/certification-in-leadership-and-management', objective: 'Cualidaes de un lider' }
         ],
         apps: [
             { name: 'Leadership Challenge', objective: 'Simular decisiones de liderazgo' }
