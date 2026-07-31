@@ -308,15 +308,17 @@ const RECOMMENDATIONS = {
     },
     crisis: {
         webs: [
-            { name: ' FEMA Training', url: 'https://training.fema.gov', objective: 'Aprender gestión de emergencias' },
-            { name: 'Psychology Today - Stress Management', url: 'https://psychologytoday.com', objective: 'Técnicas de manejo de crisis' }
+            { name: 'AnahucX', url: 'https://www.edx.org/learn/leadership/universidades-anahuac-inteligencia-emocional-para-el-liderazgo-efectivo-y-colaboracion', objective: 'Inteligencia Emocional para el Liderazgo' },
+            { name: 'Oxford Home Study', url: 'https://www.oxfordhomestudy.com/courses/online-management-courses/crisis-management-courses', objective: 'Manejo Gerencial de Crisis' },
+            { name: 'Psychology Today - Stress Management', url: 'https://www.psychologytoday.com/us/basics/stress', objective: 'Técnicas de manejo de crisis' }
         ],
         apps: [
-            { name: 'Calm', objective: 'Mantener calma bajo presión' },
-            { name: 'Headspace', objective: 'Meditación para claridad mental' }
+            { name: 'Insight Timer', url: 'https://insighttimer.com/', objective: 'Mantener calma' },
+            { name: 'Medito Foundation', url: 'https://meditofoundation.org/', objective: 'Construeyendo Conscientemente' }
         ],
         videos: [
-            { name: 'TED - Trabajar bajo presión', url: 'https://ted.com', objective: 'Estrategias para crisis' }
+            { name: 'TED - Trabajar bajo presión', url: 'https://www.ted.com/talks/andrea_dinardo_thriving_under_pressure', objective: 'Estrategias para crisis' },
+            { name: 'TED - El estres tu amigo', url: 'https://www.youtube.com/watch?v=RcGyVTAoXEU', objective: 'Convierte el estres en tu amigo' }
         ],
         trabajos: [
             { name: 'Brigadista universitario', objective: 'Practicar respuesta a emergencias' },
@@ -325,14 +327,16 @@ const RECOMMENDATIONS = {
     },
     negociacion: {
         webs: [
-            { name: 'Harvard Negotiation Project', url: 'https://pon.harvard.edu', objective: 'Aprender método Harvard' },
-            { name: 'Negotiation Mastery Online', url: 'https://online.hbs.edu', objective: 'Técnicas avanzadas de negociación' }
+            { name: 'Harvard Negotiation Project', url: 'https://www.pon.harvard.edu/free-reports/', objective: 'Aprender método Harvard' },
+            { name: 'edX - Cursos de Negociación', url: 'https://www.edx.org/es/aprende/negociacion', objective: 'Aprende Habilidades Blandas Imprescindibles' },
+            { name: 'HarvardX', url: 'https://www.edx.org/learn/business-management/harvard-university-purpose-perspective-and-persuasion', objective: 'Proposito, Perspectiva y Persuación' },
+            { name: 'Introducción a la Negociación - Yale >University', url: 'https://www.coursera.org/learn/negotiation', objective: 'Coursera' }
         ],
         apps: [
-            { name: 'Negotiation Simulator', objective: 'Practicar escenarios de negociación' }
+            { name: 'Negotiation Skills 101', url: 'https://play.google.com/store/apps/details?id=com.negotiation.skills101', objective: 'Practicar escenarios de negociación' }
         ],
         videos: [
-            { name: 'TED - El arte de negociar', url: 'https://ted.com', objective: 'Estrategias win-win' }
+            { name: 'TED - El arte de negociar', url: 'https://www.ted.com/talks/sudeep_sharma_why_should_you_master_the_art_of_negotiation', objective: 'Estrategias win-win' }
         ],
         trabajos: [
             { name: 'Ventas part-time', objective: 'Practicar persuasión y cierre' },
@@ -341,15 +345,15 @@ const RECOMMENDATIONS = {
     },
     resiliencia: {
         webs: [
-            { name: 'Positive Psychology Program', url: 'https://positivepsychology.com', objective: 'Desarrollar mentalidad de crecimiento' },
-            { name: 'Resilience Builder', url: 'https://resiliencebuilder.com', objective: 'Herramientas de resiliencia' }
+            { name: 'La Ciencia harvard de la Felicidad', url: 'https://www.edx.org/learn/happiness/university-of-california-berkeley-the-science-of-happiness', objective: 'Principios de Vida Feliz' },
+            { name: 'Resilience Builder', url: 'https://www.teachresilience.org/resilience-builder-program-universal/', objective: 'Herramientas de resiliencia' }
         ],
         apps: [
-            { name: 'Woebot', objective: 'Soporte emocional AI' },
-            { name: 'Moodpath', objective: 'Seguimiento emocional' }
+            { name: 'Yana', url: 'https://www.teachresilience.org/resilience-builder-program-universal/', objective: 'Soporte emocional AI' }
         ],
         videos: [
-            { name: 'TED - El poder de creer', url: 'https://ted.com', objective: 'Fortalecer autoeficacia' }
+            { name: 'TED - El poder de creer que puedes mejorar', url: 'https://www.youtube.com/watch?v=WiS0waTjeTE', objective: 'Fortalecer autoeficacia' },
+            { name: 'TED - El poder de creer en ti', url: 'https://www.ted.com/talks/ceci_wallace_el_poder_de_creer_en_ti', objective: 'Cambia tu vida' }
         ],
         trabajos: [
             { name: 'Deportes competitivos', objective: 'Aprender a manejar victorias y derrotas' },
