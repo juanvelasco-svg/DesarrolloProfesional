@@ -292,13 +292,14 @@ const RECOMMENDATIONS = {
             { name: 'BusinessBalls - Liderazgo y Gerencia', url: 'https://www.businessballs.com/', objective: 'Artículos ligeros de liderazgo' },
             { name: 'Ejerciendo Liderazgo', url: 'https://harvardonline.harvard.edu/course/exercising-leadership-foundational-principles', objective: 'Principios Fundamentales' },
             { name: 'Liderazgo sin temor', url: 'https://www.edx.org/learn/business-management/harvard-university-purpose-perspective-and-persuasion', objective: 'Proposito, Perspectiva y Persuación' },
-            { name: 'Oxford - Cualidades de Liderazgo', url: 'https://www.oxfordhomestudy.com/courses/leadership-courses-online/certification-in-leadership-and-management', objective: 'Cualidaes de un lider' }
+            { name: 'Oxford - Cualidades de Liderazgo', url: 'https://www.oxfordhomestudy.com/courses/leadership-courses-online/certification-in-leadership-and-management', objective: 'Cualidaes de un lider' },
+            { name: 'Business Simulations', url: 'https://businesssimulations.com/insights/articles/five-great-mobile-phone-apps-for-leadership-development-all-free-too/', objective: 'Desarrollo de Liderazgo' }
         ],
         apps: [
-            { name: 'Leadership Challenge', objective: 'Simular decisiones de liderazgo' }
+            { name: 'Bunch', url: 'https://www.bunch.ai/blog/improve-leadership-skills-app',  objective: 'Desarrollo de habilidades de Liderazgo' }
         ],
         videos: [
-            { name: 'TED - Líderes que inspiran', url: 'https://ted.com', objective: 'Observar estilos de liderazgo efectivo' }
+            { name: 'TED - Líderes que inspiran', url: 'https://www.youtube.com/watch?v=4bcB5FJq80Q', objective: 'Observar estilos de liderazgo efectivo' }
         ],
         trabajos: [
             { name: 'Líder de proyecto universitario', objective: 'Practicar gestión de equipos' },
