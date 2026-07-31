@@ -385,9 +385,9 @@ const RECOMMENDATIONS = {
             { name: 'Harvard edX', url: 'https://www.edx.org/es/aprende/estrategia', objective: 'Cursos de estratégia' }
         ],
         apps: [
-            { name: 'Business strategy 2', url:'https://play.google.com/store/apps/details?id=com.DefaultCompany.businessstrategy2'; objective: 'Juegos de Negocios' },
-            { name: 'Business strategy 3', url:'https://play.google.com/store/apps/details?id=com.Izygames.BusinessStrategy3'; objective: 'Juegos de Negocios' },
-            { name: 'S', url: 'httimulación de Negociosps://www.simcompanies.com/', objective: 'Practicar planificación a largo plazo' }
+            { name: 'Business strategy 2', url:'https://play.google.com/store/apps/details?id=com.DefaultCompany.businessstrategy2', objective: 'Juegos de Negocios' },
+            { name: 'Business strategy 3', url:'https://play.google.com/store/apps/details?id=com.Izygames.BusinessStrategy3', objective: 'Juegos de Negocios' },
+            { name: 'SimCompanies', url:'https://www.simcompanies.com/', objective: 'Practicar planificación a largo plazo' }
         ],
         videos: [
             { name: 'TED - Pensamiento sistémico', url: 'hhttps://www.youtube.com/watch?v=ElVNiDis1DA', objective: 'Ver el panorama completo' }
