@@ -27,8 +27,8 @@ const MATRIX_2_2 = {
     ALTA_GERENCIA: {
         name: 'Alta Gerencia',
         emoji: '👔',
-        youthName: 'El/La Jefe Máximo/a',
-        youthDescription: 'Mandas en toda la empresa, tomas las decisiones importantes y lideras equipos grandes',
+        youthName: 'Manager exitoso',
+        youthDescription: 'Lideras la empresa, tomas las decisiones importantes y gestionas equipos grandes',
         competencies: {
             cognitivas: 5, sociales: 5, eticas: 5, liderazgo: 5,
             crisis: 5, negociacion: 5, resiliencia: 5, emocional: 5, estrategico: 5
@@ -38,7 +38,7 @@ const MATRIX_2_2 = {
     EMPRENDEDOR: {
         name: 'Emprendedor',
         emoji: '💡',
-        youthName: 'El/La Emprende',
+        youthName: 'Emprender',
         youthDescription: 'Creas tu propio negocio, innovas y haces realidad tus ideas locas',
         competencies: {
             cognitivas: 4, sociales: 4, eticas: 4, liderazgo: 4,
@@ -49,7 +49,7 @@ const MATRIX_2_2 = {
     INVESTIGADOR: {
         name: 'Investigador',
         emoji: '🔬',
-        youthName: 'El/La Científico/a',
+        youthName: 'Científico/a',
         youthDescription: 'Descubres cosas nuevas, investigas a fondo y eres un crack resolviendo misterios',
         competencies: {
             cognitivas: 5, sociales: 2, eticas: 4, liderazgo: 2,
@@ -60,7 +60,7 @@ const MATRIX_2_2 = {
     GESTION_PUBLICA: {
         name: 'Gestión Pública',
         emoji: '🏛️',
-        youthName: 'El/La Servidor/a Público',
+        youthName: 'Servidor/a Público valioso',
         youthDescription: 'Trabajas para el gobierno ayudando a la gente y mejorando tu comunidad',
         competencies: {
             cognitivas: 4, sociales: 4, eticas: 5, liderazgo: 4,
@@ -82,7 +82,7 @@ const MATRIX_2_2 = {
     SALUD: {
         name: 'Salud',
         emoji: '🏥',
-        youthName: 'El/La Sanador/a',
+        youthName: 'Medico/a excepcional',
         youthDescription: 'Cuidas de la salud de las personas, salvas vidas y haces que otros se sientan mejor',
         competencies: {
             cognitivas: 5, sociales: 5, eticas: 4, liderazgo: 4,
@@ -93,7 +93,7 @@ const MATRIX_2_2 = {
     IMPACTO_SOCIAL: {
         name: 'Impacto Social',
         emoji: '🌍',
-        youthName: 'El/La Activista',
+        youthName: 'Activista para crecer',
         youthDescription: 'Luchas por un mundo mejor, ayudas a los demás y cambias la sociedad',
         competencies: {
             cognitivas: 2, sociales: 4, eticas: 5, liderazgo: 4,
@@ -104,7 +104,7 @@ const MATRIX_2_2 = {
     SOSTENIBILIDAD: {
         name: 'Sostenibilidad',
         emoji: '♻️',
-        youthName: 'El/La Eco-Guerrero/a',
+        youthName: 'Eco-Guerrero/a',
         youthDescription: 'Proteges el planeta, promueves el reciclaje y cuidas el medio ambiente',
         competencies: {
             cognitivas: 4, sociales: 4, eticas: 5, liderazgo: 2,
