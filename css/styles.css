@@ -108,4 +108,84 @@ body {
     h3 {
         font-size: 1.25rem;
     }
+    
+    /* Table responsiveness for mobile */
+    .table-responsive {
+        font-size: 0.85rem;
+    }
+    
+    .table th, .table td {
+        white-space: nowrap;
+    }
+    
+    /* Navbar adjustments */
+    .navbar-brand {
+        font-size: 1rem;
+    }
+    
+    /* Button sizing on mobile */
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .table-responsive {
+        font-size: 0.9rem;
+    }
+    
+    .container-fluid {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Mobile first - ensure proper viewport scaling */
+@media (max-width: 576px) {
+    .card-body {
+        padding: 1rem !important;
+    }
+    
+    h1.display-4 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 1.25rem;
+    }
+    
+    /* Stack form elements better on small screens */
+    .form-control, .form-select {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    /* Better spacing for mobile */
+    .mb-3, .mb-4 {
+        margin-bottom: 1rem !important;
+    }
+    
+    /* Ensure tables scroll horizontally */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Adjust modal sizing for mobile */
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+}
+
+/* Laptop and desktop optimization */
+@media (min-width: 1025px) {
+    .container-fluid {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    
+    .table-responsive {
+        font-size: 1rem;
+    }
 }
