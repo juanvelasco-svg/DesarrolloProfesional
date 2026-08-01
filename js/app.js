@@ -509,7 +509,7 @@ function handleLogin(e) {
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
     const username = usernameInput.value.trim();
-    const password = passwordInput.value;
+    let password = passwordInput.value.trim(); // Eliminar espacios al inicio/fin
     
     // LOG DETALLADO PARA DEBUGGING EN MÓVIL
     console.log('=== INTENTO DE LOGIN ===');
