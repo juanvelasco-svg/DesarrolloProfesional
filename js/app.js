@@ -516,6 +516,7 @@ function setupEventListeners() {
 
 function handleLogin(e) {
     e.preventDefault();
+    alert(`Debug: Usuario=[${username}] Pass=[${password}]`);
     
     // Obtener valores y normalizar (trim para evitar espacios accidentales)
     const usernameInput = document.getElementById('username');
