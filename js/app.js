@@ -716,8 +716,13 @@ function loadInstructors() {
         select.appendChild(option);
     });
     
-    // Load roles and competencies for the goals page
-    loadRolesAndCompetencies();
+        // Load roles and competencies for the goals page
+    try {
+        loadRolesAndCompetencies();
+    } catch (e) {
+        console.error('Error cargando roles y competencias:', e);
+        alert('Ocurrió un error al cargar la página. Por favor recarga.');
+    }
 }
 
 function loadRolesAndCompetencies() {
