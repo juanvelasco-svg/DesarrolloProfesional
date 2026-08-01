@@ -1108,7 +1108,7 @@ function loadInstructorDashboard() {
     tbody.innerHTML = '';
     
     if (allParticipants.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" class="text-center">No hay participantes registrados</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center">No hay participantes registrados</td></tr>';
         return;
     }
     
@@ -1147,7 +1147,6 @@ function loadInstructorDashboard() {
         
         row.innerHTML = `
             <td>${participant?.fullName || 'N/A'}</td>
-            <td>${MATRIX_2_2[profile?.selectedRole]?.emoji || ''} ${MATRIX_2_2[profile?.selectedRole]?.name || profile?.selectedRole || 'No definido'}</td>
             <td>${instructorName}</td>
             <td><small>${profile?.lifeGoals ? profile.lifeGoals.substring(0, 30) + '...' : '-'}</small></td>
             <td>${strengths}</td>
