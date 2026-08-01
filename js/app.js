@@ -408,6 +408,41 @@ let radarChart = null;
 document.addEventListener('DOMContentLoaded', function() {
     DB.initialize();
     setupEventListeners();
+    
+    // Verificar si hay sesión almacenada (útil en móviles para no perder login)
+    const savedUser = sessionStorage.getItem('currentUser');
+    if (savedUser) {
+        try {
+            const user = JSON.parse(savedUser);
+            currentUser = user;
+            currentRole = user.role;
+            
+            // Restaurar sesión
+            document.getElementById('loginPage').classList.add('d-none');
+            document.getElementById('mainApp').classList.remove('d-none');
+            document.getElementById('userName').textContent = user.fullName;
+            
+            // Setup navigation based on role
+            document.getElementById('participantNav').classList.toggle('d-none', user.role !== 'participante');
+            document.getElementById('instructorNav').classList.toggle('d-none', user.role !== 'instructor');
+            document.getElementById('adminNav').classList.toggle('d-none', user.role !== 'admin');
+            
+            // Load appropriate page
+            if (user.role === 'participante') {
+                navigateTo('goals');
+                loadInstructors();
+            } else if (user.role === 'instructor') {
+                navigateTo('instructor-dashboard');
+                loadInstructorDashboard();
+            } else if (user.role === 'admin') {
+                navigateTo('admin-dashboard');
+                loadAdminDashboard();
+            }
+        } catch (e) {
+            console.error('Error restaurando sesión:', e);
+            sessionStorage.removeItem('currentUser');
+        }
+    }
 });
 
 function setupEventListeners() {
@@ -470,15 +505,27 @@ function setupEventListeners() {
 function handleLogin(e) {
     e.preventDefault();
     
-    const username = document.getElementById('username').value;
+    // Obtener valores y normalizar (trim para evitar espacios accidentales)
+    const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value;
     
+    // Validación básica antes de buscar
+    if (!username || !password) {
+        alert('⚠️ Por favor ingresa usuario y contraseña.');
+        return;
+    }
+    
     const users = DB.getUsers();
-    const user = users.find(u => u.username === username && u.password === password);
+    
+    // Búsqueda case-insensitive para el usuario, exacta para password
+    const user = users.find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
     
     if (user) {
         currentUser = user;
         currentRole = user.role;
+        
+        // Guardar sesión en localStorage para mejor experiencia móvil
+        sessionStorage.setItem('currentUser', JSON.stringify(user));
         
         document.getElementById('loginPage').classList.add('d-none');
         document.getElementById('mainApp').classList.remove('d-none');
@@ -501,22 +548,36 @@ function handleLogin(e) {
             loadAdminDashboard();
         }
     } else {
-        alert('❌ Credenciales incorrectas. Intenta de nuevo.');
+        // Mensaje más claro para debugging
+        console.log('Login fallido:', { username, passwordLength: password.length, usersCount: users.length });
+        alert('❌ Credenciales incorrectas. Verifica mayúsculas, minúsculas y espacios.');
     }
 }
 
 function handleRegister(e) {
     e.preventDefault();
     
-    const username = document.getElementById('regUsername').value;
+    // Normalizar username (trim y case-insensitive check)
+    const username = document.getElementById('regUsername').value.trim();
     const password = document.getElementById('regPassword').value;
     const fullName = document.getElementById('regFullName').value;
     const role = document.getElementById('regRole').value;
     
+    // Validaciones básicas
+    if (!username || !password || !fullName || !role) {
+        alert('⚠️ Por favor completa todos los campos.');
+        return;
+    }
+    
+    if (password.length < 4) {
+        alert('⚠️ La contraseña debe tener al menos 4 caracteres.');
+        return;
+    }
+    
     const users = DB.getUsers();
     
-    // Check if username already exists
-    if (users.find(u => u.username === username)) {
+    // Check if username already exists (case-insensitive)
+    if (users.find(u => u.username.toLowerCase() === username.toLowerCase())) {
         alert('⚠️ El nombre de usuario ya existe. Por favor elige otro.');
         return;
     }
@@ -543,6 +604,8 @@ function handleRegister(e) {
 function handleLogout() {
     currentUser = null;
     currentRole = null;
+    // Limpiar sesión almacenada
+    sessionStorage.removeItem('currentUser');
     document.getElementById('mainApp').classList.add('d-none');
     document.getElementById('loginPage').classList.remove('d-none');
     document.getElementById('loginForm').reset();
