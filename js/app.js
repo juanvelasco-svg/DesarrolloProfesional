@@ -516,98 +516,71 @@ function setupEventListeners() {
 
 function handleLogin(e) {
     e.preventDefault();
-    alert(`Debug: Usuario=[${username}] Pass=[${password}]`);
     
-    // Obtener valores y normalizar (trim para evitar espacios accidentales)
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const username = usernameInput.value.trim();
-    let password = passwordInput.value.trim(); // Eliminar espacios al inicio/fin
-    
-    // LOG DETALLADO PARA DEBUGGING EN MÓVIL
-    console.log('=== INTENTO DE LOGIN ===');
-    console.log('Username input value:', JSON.stringify(usernameInput.value));
-    console.log('Username after trim:', JSON.stringify(username));
-    console.log('Password input value:', JSON.stringify(passwordInput.value));
-    console.log('Password length:', password.length);
-    console.log('Password after trim:', JSON.stringify(password.trim()));
-    console.log('Username bytes:', new TextEncoder().encode(username));
-    console.log('Password bytes:', new TextEncoder().encode(password));
-    
-    // Validación básica antes de buscar
-    if (!username || !password) {
-        console.log('ERROR: Campos vacíos');
-        alert('⚠️ Por favor ingresa usuario y contraseña.');
-        return;
-    }
-    
-    const users = DB.getUsers();
-    
-    console.log('Usuarios en la base de datos:', users);
-    console.log('Número de usuarios:', users.length);
-    
-    // Búsqueda case-insensitive para el usuario, exacta para password
-    let foundUser = null;
-    let matchReason = '';
-    
-    for (let i = 0; i < users.length; i++) {
-        const u = users[i];
-        console.log(`Comparando con usuario ${i + 1}:`, { 
-            storedUsername: u.username, 
-            storedPassword: u.password,
-            usernameMatch: u.username.toLowerCase() === username.toLowerCase(),
-            passwordMatch: u.password === password,
-            passwordTrimMatch: u.password === password.trim()
-        });
+    try {
+        // Obtener valores y normalizar
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const username = usernameInput.value.trim();
+        let password = passwordInput.value.trim();
         
-                if (u.username.toLowerCase() === username.toLowerCase()) {
-            // Comparar contraseñas normalizando espacios
-            if (u.password.trim() === password) {
+        // Debug rápido: mostrar credenciales (quítalo cuando funcione)
+        // alert(`Debug: Usuario=[${username}] Pass=[${password}]`);
+        
+        if (!username || !password) {
+            alert('⚠️ Por favor ingresa usuario y contraseña.');
+            return;
+        }
+        
+        const users = DB.getUsers();
+        let foundUser = null;
+        
+        for (let i = 0; i < users.length; i++) {
+            const u = users[i];
+            if (u.username.toLowerCase() === username.toLowerCase() && u.password.trim() === password) {
                 foundUser = u;
-                matchReason = 'coincidencia exacta (normalizada)';
                 break;
             }
         }
-    }
-    
-    const user = foundUser;
-    
-    if (user) {
-        console.log('LOGIN EXITOSO:', { user: user.username, reason: matchReason });
-        currentUser = user;
-        currentRole = user.role;
         
-        // Guardar sesión en localStorage para mejor experiencia móvil
-        sessionStorage.setItem('currentUser', JSON.stringify(user));
-        
-        document.getElementById('loginPage').classList.add('d-none');
-        document.getElementById('mainApp').classList.remove('d-none');
-        document.getElementById('userName').textContent = user.fullName;
-        
-        // Setup navigation based on role
-        document.getElementById('participantNav').classList.toggle('d-none', user.role !== 'participante');
-        document.getElementById('instructorNav').classList.toggle('d-none', user.role !== 'instructor');
-        document.getElementById('adminNav').classList.toggle('d-none', user.role !== 'admin');
-        
-        // Load appropriate page
-        if (user.role === 'participante') {
-            navigateTo('goals');
-            loadInstructors();
-        } else if (user.role === 'instructor') {
-            navigateTo('instructor-dashboard');
-            loadInstructorDashboard();
-        } else if (user.role === 'admin') {
-            navigateTo('admin-dashboard');
-            loadAdminDashboard();
+        if (foundUser) {
+            currentUser = foundUser;
+            currentRole = foundUser.role;
+            sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
+            
+            document.getElementById('loginPage').classList.add('d-none');
+            document.getElementById('mainApp').classList.remove('d-none');
+            document.getElementById('userName').textContent = foundUser.fullName;
+            
+            document.getElementById('participantNav').classList.toggle('d-none', foundUser.role !== 'participante');
+            document.getElementById('instructorNav').classList.toggle('d-none', foundUser.role !== 'instructor');
+            document.getElementById('adminNav').classList.toggle('d-none', foundUser.role !== 'admin');
+            
+            // Expandir navbar en móviles (protegido)
+            const navbarCollapse = document.getElementById('navbarNav');
+            if (navbarCollapse && typeof bootstrap !== 'undefined') {
+                if (!navbarCollapse.classList.contains('show')) {
+                    const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+                    bsCollapse.show();
+                }
+            }
+            
+            if (foundUser.role === 'participante') {
+                navigateTo('goals');
+                loadInstructors();
+            } else if (foundUser.role === 'instructor') {
+                navigateTo('instructor-dashboard');
+                loadInstructorDashboard();
+            } else if (foundUser.role === 'admin') {
+                navigateTo('admin-dashboard');
+                loadAdminDashboard();
+            }
+        } else {
+            alert('❌ Credenciales incorrectas.');
         }
-    } else {
-        // Mensaje más claro para debugging
-        console.log('=== LOGIN FALLIDO ===');
-        console.log('Username buscado:', JSON.stringify(username));
-        console.log('Password buscado:', JSON.stringify(password));
-        console.log('Total usuarios:', users.length);
-        console.log('Usuarios disponibles:', users.map(u => u.username));
-        alert('❌ Credenciales incorrectas. Revisa la consola del navegador para más detalles.');
+    } catch (error) {
+        alert('Error en login: ' + error.message + '\nVer consola para detalles.');
+        console.error(error);
     }
 }
 
