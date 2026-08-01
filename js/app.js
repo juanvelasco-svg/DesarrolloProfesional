@@ -1058,44 +1058,36 @@ function loadRecommendations() {
         const recs = RECOMMENDATIONS[compKey];
         if (!recs) return;
         
-        const compName = {
-            cognitivas: 'Competencias Cognitivas',
-            sociales: 'Competencias Sociales',
-            eticas: 'Competencias Éticas',
-            liderazgo: 'Liderazgo',
-            crisis: 'Manejo de Crisis',
-            negociacion: 'Negociación',
-            resiliencia: 'Resiliencia',
-            emocional: 'Equilibrio Emocional',
-            estrategico: 'Análisis Estratégico'
-        }[compKey];
+        const compData = COMPETENCIES_YOUTH[compKey];
+        const compEmoji = compData ? compData.youthName.split(' ')[0] : '📚';
+        const compName = compData ? compData.youthName : compKey;
         
         const card = document.createElement('div');
         card.className = 'col-lg-6';
         card.innerHTML = `
             <div class="card recommendation-card h-100">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">📚 ${compName}</h5>
+                    <h5 class="mb-0">${compEmoji} ${compName}</h5>
                 </div>
                 <div class="card-body">
                     <h6 class="fw-bold">🌐 Páginas Web</h6>
                     <ul class="list-unstyled">
-                        ${recs.webs.map(w => `<li class="mb-2"><a href="${w.url}" target="_blank" class="text-decoration-none">➡️ ${w.name}</a><br><small class="text-muted">Objetivo: ${w.objective}</small></li>`).join('')}
+                        ${recs.webs.map(w => `<li class="mb-2 ps-3"><a href="${w.url}" target="_blank" class="text-decoration-none fw-bold">➡️ ${w.name}</a><br><small class="text-muted">📌 ${w.objective}</small></li>`).join('')}
                     </ul>
                     
                     <h6 class="fw-bold mt-3">📱 Aplicaciones</h6>
                     <ul class="list-unstyled">
-                        ${recs.apps.map(a => `<li class="mb-2">📲 <strong>${a.name}</strong><br><small class="text-muted">Objetivo: ${a.objective}</small></li>`).join('')}
+                        ${recs.apps.map(a => `<li class="mb-2 ps-3"><a href="${a.url}" target="_blank" class="text-decoration-none fw-bold">📲 ${a.name}</a><br><small class="text-muted">📌 ${a.objective}</small></li>`).join('')}
                     </ul>
                     
                     <h6 class="fw-bold mt-3">🎥 Videos</h6>
                     <ul class="list-unstyled">
-                        ${recs.videos.map(v => `<li class="mb-2"><a href="${v.url}" target="_blank" class="text-decoration-none">▶️ ${v.name}</a><br><small class="text-muted">Objetivo: ${v.objective}</small></li>`).join('')}
+                        ${recs.videos.map(v => `<li class="mb-2 ps-3"><a href="${v.url}" target="_blank" class="text-decoration-none fw-bold">▶️ ${v.name}</a><br><small class="text-muted">📌 ${v.objective}</small></li>`).join('')}
                     </ul>
                     
                     <h6 class="fw-bold mt-3">💼 Trabajos Temporales</h6>
                     <ul class="list-unstyled">
-                        ${recs.trabajos.map(t => `<li class="mb-2">💼 <strong>${t.name}</strong><br><small class="text-muted">Objetivo: ${t.objective}</small></li>`).join('')}
+                        ${recs.trabajos.map(t => `<li class="mb-2 ps-3"><strong>💼 ${t.name}</strong><br><small class="text-muted">📌 ${t.objective}</small></li>`).join('')}
                     </ul>
                 </div>
             </div>
@@ -1253,7 +1245,171 @@ window.updateParticipantInstructor = function(participantId) {
 };
 
 window.viewParticipantDetails = function(userId) {
-    alert('Funcionalidad de detalle en desarrollo para usuario ID: ' + userId);
+    const users = DB.getUsers();
+    const profiles = DB.getProfiles();
+    const results = DB.getResults();
+    
+    const participant = users.find(u => u.id === userId);
+    const profile = profiles.find(p => p.userId === userId);
+    const result = results.find(r => r.userId === userId);
+    
+    if (!participant) {
+        alert('Participante no encontrado');
+        return;
+    }
+    
+    // Build modal content with participant info, results and recommendations
+    let content = `
+        <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">📋 Resultados de ${participant.fullName}</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+    `;
+    
+    // Participant basic info
+    content += `
+        <div class="card mb-3">
+            <div class="card-header bg-info text-white">
+                <h6 class="mb-0">👤 Información del Participante</h6>
+            </div>
+            <div class="card-body">
+                <p><strong>Nombre:</strong> ${participant.fullName}</p>
+                <p><strong>Rol seleccionado:</strong> ${MATRIX_2_2[profile?.selectedRole]?.emoji || ''} ${MATRIX_2_2[profile?.selectedRole]?.name || 'No definido'}</p>
+                <p><strong>Metas de vida:</strong> ${profile?.lifeGoals || 'No especificadas'}</p>
+            </div>
+        </div>
+    `;
+    
+    if (!result) {
+        content += `<div class="alert alert-warning">⚠️ Este participante aún no ha completado la evaluación.</div>`;
+    } else {
+        // Results summary
+        content += `
+            <div class="card mb-3">
+                <div class="card-header bg-success text-white">
+                    <h6 class="mb-0">✅ Resultados de la Evaluación</h6>
+                </div>
+                <div class="card-body">
+                    <h6>Puntajes por competencia:</h6>
+                    <div class="row">
+        `;
+        
+        Object.entries(result.scores).forEach(([compKey, score]) => {
+            const compName = COMPETENCIES_YOUTH[compKey]?.youthName || compKey;
+            const badgeClass = score >= 4 ? 'bg-success' : score >= 3 ? 'bg-warning' : 'bg-danger';
+            content += `
+                <div class="col-md-6 mb-2">
+                    <span class="badge ${badgeClass}">${compName}: ${score.toFixed(2)}</span>
+                </div>
+            `;
+        });
+        
+        content += `</div>`;
+        
+        // Strengths and improvements
+        const strongComps = Object.entries(result.scores)
+            .filter(([_, s]) => s >= 4)
+            .map(([k, _]) => k);
+        
+        const weakComps = Object.entries(result.scores)
+            .filter(([_, s]) => s < 3.5)
+            .map(([k, _]) => k);
+        
+        if (strongComps.length > 0) {
+            content += `<p class="mt-3"><strong>💪 Fortalezas:</strong> ${strongComps.map(c => COMPETENCIES_YOUTH[c]?.youthName || c).join(', ')}</p>`;
+        }
+        
+        if (weakComps.length > 0) {
+            content += `<p class="text-danger"><strong>📈 Áreas a mejorar:</strong> ${weakComps.map(c => COMPETENCIES_YOUTH[c]?.youthName || c).join(', ')}</p>`;
+        }
+        
+        content += `</div></div>`;
+        
+        // Recommendations
+        if (weakComps.length > 0) {
+            content += `
+                <div class="card mb-3">
+                    <div class="card-header bg-warning text-dark">
+                        <h6 class="mb-0">📚 Recomendaciones Personalizadas</h6>
+                    </div>
+                    <div class="card-body">
+            `;
+            
+            weakComps.forEach(compKey => {
+                const recs = RECOMMENDATIONS[compKey];
+                if (!recs) return;
+                
+                const compName = COMPETENCIES_YOUTH[compKey]?.youthName || compKey;
+                
+                content += `
+                    <div class="recommendation-section mb-4 p-3 border rounded bg-light">
+                        <h6 class="fw-bold text-primary mb-3">🎯 ${compName}</h6>
+                        
+                        <div class="mb-3">
+                            <h6 class="fw-bold">🌐 Páginas Web</h6>
+                            <ul class="list-unstyled">
+                                ${recs.webs.map(w => `
+                                    <li class="mb-2 ps-3">
+                                        <a href="${w.url}" target="_blank" class="text-decoration-none fw-bold">➡️ ${w.name}</a>
+                                        <br><small class="text-muted">📌 ${w.objective}</small>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="fw-bold">📱 Aplicaciones</h6>
+                            <ul class="list-unstyled">
+                                ${recs.apps.map(a => `
+                                    <li class="mb-2 ps-3">
+                                        <a href="${a.url}" target="_blank" class="text-decoration-none fw-bold">📲 ${a.name}</a>
+                                        <br><small class="text-muted">📌 ${a.objective}</small>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="fw-bold">🎥 Videos</h6>
+                            <ul class="list-unstyled">
+                                ${recs.videos.map(v => `
+                                    <li class="mb-2 ps-3">
+                                        <a href="${v.url}" target="_blank" class="text-decoration-none fw-bold">▶️ ${v.name}</a>
+                                        <br><small class="text-muted">📌 ${v.objective}</small>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="fw-bold">💼 Trabajos Temporales</h6>
+                            <ul class="list-unstyled">
+                                ${recs.trabajos.map(t => `
+                                    <li class="mb-2 ps-3">
+                                        <strong>💼 ${t.name}</strong>
+                                        <br><small class="text-muted">📌 ${t.objective}</small>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            content += `</div></div>`;
+        }
+    }
+    
+    content += `</div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+    `;
+    
+    document.getElementById('participantDetailsModalContent').innerHTML = content;
+    const modal = new bootstrap.Modal(document.getElementById('participantDetailsModal'));
+    modal.show();
 };
 
 // Admin: Load edit users modal
