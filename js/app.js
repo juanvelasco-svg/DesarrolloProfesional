@@ -506,21 +506,64 @@ function handleLogin(e) {
     e.preventDefault();
     
     // Obtener valores y normalizar (trim para evitar espacios accidentales)
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value;
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value;
+    
+    // LOG DETALLADO PARA DEBUGGING EN MÓVIL
+    console.log('=== INTENTO DE LOGIN ===');
+    console.log('Username input value:', JSON.stringify(usernameInput.value));
+    console.log('Username after trim:', JSON.stringify(username));
+    console.log('Password input value:', JSON.stringify(passwordInput.value));
+    console.log('Password length:', password.length);
+    console.log('Password after trim:', JSON.stringify(password.trim()));
+    console.log('Username bytes:', new TextEncoder().encode(username));
+    console.log('Password bytes:', new TextEncoder().encode(password));
     
     // Validación básica antes de buscar
     if (!username || !password) {
+        console.log('ERROR: Campos vacíos');
         alert('⚠️ Por favor ingresa usuario y contraseña.');
         return;
     }
     
     const users = DB.getUsers();
     
+    console.log('Usuarios en la base de datos:', users);
+    console.log('Número de usuarios:', users.length);
+    
     // Búsqueda case-insensitive para el usuario, exacta para password
-    const user = users.find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
+    let foundUser = null;
+    let matchReason = '';
+    
+    for (let i = 0; i < users.length; i++) {
+        const u = users[i];
+        console.log(`Comparando con usuario ${i + 1}:`, { 
+            storedUsername: u.username, 
+            storedPassword: u.password,
+            usernameMatch: u.username.toLowerCase() === username.toLowerCase(),
+            passwordMatch: u.password === password,
+            passwordTrimMatch: u.password === password.trim()
+        });
+        
+        if (u.username.toLowerCase() === username.toLowerCase()) {
+            if (u.password === password) {
+                foundUser = u;
+                matchReason = 'exacto';
+                break;
+            } else if (u.password === password.trim()) {
+                foundUser = u;
+                matchReason = 'password con trim';
+                break;
+            }
+        }
+    }
+    
+    const user = foundUser;
     
     if (user) {
+        console.log('LOGIN EXITOSO:', { user: user.username, reason: matchReason });
         currentUser = user;
         currentRole = user.role;
         
@@ -549,8 +592,12 @@ function handleLogin(e) {
         }
     } else {
         // Mensaje más claro para debugging
-        console.log('Login fallido:', { username, passwordLength: password.length, usersCount: users.length });
-        alert('❌ Credenciales incorrectas. Verifica mayúsculas, minúsculas y espacios.');
+        console.log('=== LOGIN FALLIDO ===');
+        console.log('Username buscado:', JSON.stringify(username));
+        console.log('Password buscado:', JSON.stringify(password));
+        console.log('Total usuarios:', users.length);
+        console.log('Usuarios disponibles:', users.map(u => u.username));
+        alert('❌ Credenciales incorrectas. Revisa la consola del navegador para más detalles.');
     }
 }
 
