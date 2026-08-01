@@ -435,17 +435,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 bsCollapse.show();
             }
             
-            // Load appropriate page
-            if (user.role === 'participante') {
-                navigateTo('goals');
-                loadInstructors();
-            } else if (user.role === 'instructor') {
-                navigateTo('instructor-dashboard');
-                loadInstructorDashboard();
-            } else if (user.role === 'admin') {
-                navigateTo('admin-dashboard');
-                loadAdminDashboard();
-            }
+                    // Load appropriate page
+        if (user.role === 'participante') {
+            navigateTo('goals');
+            loadInstructors();
+            // Scroll al contenido principal en móviles
+            document.getElementById('goalsPage')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (user.role === 'instructor') {
+            navigateTo('instructor-dashboard');
+            loadInstructorDashboard();
+            document.getElementById('instructorDashboardPage')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (user.role === 'admin') {
+            navigateTo('admin-dashboard');
+            loadAdminDashboard();
+            document.getElementById('adminDashboardPage')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
         } catch (e) {
             console.error('Error restaurando sesión:', e);
             sessionStorage.removeItem('currentUser');
