@@ -2,7 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>Desarrollo Personal versión 20226 1</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
@@ -20,10 +23,10 @@
                             <p class="text-muted">Descubre tu potencial, define tu futuro</p>
                         </div>
                         
-                        <form id="loginForm">
+                        <form id="loginForm" autocomplete="on">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Usuario</label>
-                                <input type="text" class="form-control form-control-lg" id="username" required autocomplete="username">
+                                <input type="text" class="form-control form-control-lg" id="username" required autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Contraseña</label>
@@ -58,10 +61,10 @@
                             <p class="text-muted">Únete a Alcanzando Metas 2026</p>
                         </div>
                         
-                        <form id="registerForm">
+                        <form id="registerForm" autocomplete="on">
                             <div class="mb-3">
                                 <label for="regUsername" class="form-label">Usuario</label>
-                                <input type="text" class="form-control form-control-lg" id="regUsername" required autocomplete="username">
+                                <input type="text" class="form-control form-control-lg" id="regUsername" required autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false">
                             </div>
                             <div class="mb-3">
                                 <label for="regPassword" class="form-label">Contraseña</label>
