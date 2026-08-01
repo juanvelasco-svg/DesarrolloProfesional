@@ -459,7 +459,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function setupEventListeners() {
     // Login form
-    .getElementById('loginForm').addEventListener('submit', handleLogin);
+    getElementById('loginForm').addEventListener('submit', handleLogin);
     
     // Register form
     document.getElementById('registerForm').addEventListener('submit', handleRegister);
