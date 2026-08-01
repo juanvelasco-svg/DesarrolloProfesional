@@ -426,6 +426,14 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('participantNav').classList.toggle('d-none', user.role !== 'participante');
             document.getElementById('instructorNav').classList.toggle('d-none', user.role !== 'instructor');
             document.getElementById('adminNav').classList.toggle('d-none', user.role !== 'admin');
+
+            // En móviles, expandir automáticamente el menú de navegación para que el usuario vea las opciones
+            const navbarCollapse = document.getElementById('navbarNav');
+            if (navbarCollapse && !navbarCollapse.classList.contains('show')) {
+                // Usar Bootstrap Collapse para mostrar sin toggle manual
+                const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+                bsCollapse.show();
+            }
             
             // Load appropriate page
             if (user.role === 'participante') {
@@ -447,7 +455,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function setupEventListeners() {
     // Login form
-    document.getElementById('loginForm').addEventListener('submit', handleLogin);
+    .getElementById('loginForm').addEventListener('submit', handleLogin);
     
     // Register form
     document.getElementById('registerForm').addEventListener('submit', handleRegister);
