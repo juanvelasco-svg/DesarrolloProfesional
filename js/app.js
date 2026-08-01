@@ -547,14 +547,11 @@ function handleLogin(e) {
             passwordTrimMatch: u.password === password.trim()
         });
         
-        if (u.username.toLowerCase() === username.toLowerCase()) {
-            if (u.password === password) {
+                if (u.username.toLowerCase() === username.toLowerCase()) {
+            // Comparar contraseñas normalizando espacios
+            if (u.password.trim() === password) {
                 foundUser = u;
-                matchReason = 'exacto';
-                break;
-            } else if (u.password === password.trim()) {
-                foundUser = u;
-                matchReason = 'password con trim';
+                matchReason = 'coincidencia exacta (normalizada)';
                 break;
             }
         }
