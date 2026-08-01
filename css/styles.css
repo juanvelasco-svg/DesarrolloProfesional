@@ -128,6 +128,23 @@ body {
         padding: 0.25rem 0.5rem;
         font-size: 0.75rem;
     }
+    
+    /* Fix for navbar navigation visibility on mobile */
+    #participantNav, #instructorNav, #adminNav {
+        display: flex !important;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    #participantNav.d-none, #instructorNav.d-none, #adminNav.d-none {
+        display: none !important;
+    }
+    
+    /* Remove me-auto margin on mobile to center nav items */
+    .navbar-nav.me-auto {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
 }
 
 /* Tablet adjustments */

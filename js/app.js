@@ -485,9 +485,9 @@ function handleLogin(e) {
         document.getElementById('userName').textContent = user.fullName;
         
         // Setup navigation based on role
-        document.getElementById('participantNav').style.display = user.role === 'participante' ? 'flex' : 'none';
-        document.getElementById('instructorNav').style.display = user.role === 'instructor' ? 'flex' : 'none';
-        document.getElementById('adminNav').style.display = user.role === 'admin' ? 'flex' : 'none';
+        document.getElementById('participantNav').classList.toggle('d-none', user.role !== 'participante');
+        document.getElementById('instructorNav').classList.toggle('d-none', user.role !== 'instructor');
+        document.getElementById('adminNav').classList.toggle('d-none', user.role !== 'admin');
         
         // Load appropriate page
         if (user.role === 'participante') {
