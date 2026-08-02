@@ -819,6 +819,11 @@ function generatePDF() {
     element.style.padding = '20px';
     element.style.background = 'white';
     element.style.width = '800px';
+    element.style.position = 'fixed';
+    element.style.top = '0';
+    element.style.left = '0';
+    element.style.zIndex = '-9999';
+    element.style.visibility = 'hidden';
     
     // Header
     element.innerHTML = `
@@ -876,32 +881,32 @@ function generatePDF() {
     
     const chartCanvas = document.createElement('canvas');
     chartCanvas.id = 'pdfRadarChart';
-    chartCanvas.width = 600;
-    chartCanvas.height = 400;
+    chartCanvas.width = 800;
+    chartCanvas.height = 500;
     chartContainer.appendChild(chartCanvas);
     
     element.appendChild(chartContainer);
     
     // Append element to body temporarily to ensure chart renders
-    element.style.position = 'absolute';
-    element.style.left = '-9999px';
-    element.style.top = '0';
     document.body.appendChild(element);
     
     // Create PDF chart with delay to ensure DOM is ready
     setTimeout(() => {
         const pdfCtx = document.getElementById('pdfRadarChart').getContext('2d');
-        new Chart(pdfCtx, {
+        const radarChart = new Chart(pdfCtx, {
             type: 'radar',
             data: {
                 labels: competencies.map(c => c.name),
                 datasets: [{
                     label: 'Tus Resultados',
                     data: competencies.map(c => state.testResults[c.id] || 0),
-                    backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                    backgroundColor: 'rgba(102, 126, 234, 0.3)',
                     borderColor: 'rgba(102, 126, 234, 1)',
-                    borderWidth: 2,
-                    pointBackgroundColor: 'rgba(102, 126, 234, 1)'
+                    borderWidth: 3,
+                    pointBackgroundColor: 'rgba(102, 126, 234, 1)',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5
                 }]
             },
             options: {
@@ -911,137 +916,181 @@ function generatePDF() {
                     r: {
                         suggestedMin: 0,
                         suggestedMax: 10,
-                        ticks: { stepSize: 2 }
+                        ticks: { stepSize: 2, backdropColor: 'transparent' },
+                        grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                        angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                        pointLabels: {
+                            font: { size: 12, weight: 'bold' },
+                            color: '#333'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: { size: 14, weight: 'bold' },
+                            color: '#333'
+                        }
+                    },
+                    tooltip: {
+                        enabled: true
                     }
                 }
             }
         });
-    }, 100);
-    
-    // Add recommendations with complete format after a delay
-    setTimeout(() => {
-        element.innerHTML += `
-            <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                <h2 style="color: #856404; border-bottom: 3px solid #856404; padding-bottom: 10px;">💡 Plan de Acción Personalizado</h2>
-                <p style="margin-bottom: 20px;"><strong>Enfoque:</strong> Mejorar las siguientes competencias clave para alcanzar tus metas</p>
-                
-                ${state.recommendations.map(rec => {
-                    const comp = competencies.find(c => c.id === rec.competency);
-                    
-                    // Format webs for PDF
-                    let websHtml = '';
-                    if (rec.webs && Array.isArray(rec.webs)) {
-                        websHtml = rec.webs.map(w => 
-                            `<li style="margin-bottom: 5px;">
-                                <a href="${w.url}" style="color: #667eea;">${w.name}</a> - ${w.objective}
-                            </li>`
-                        ).join('');
-                    }
-                    
-                    // Format apps for PDF
-                    let appsHtml = '';
-                    if (rec.apps && Array.isArray(rec.apps)) {
-                        appsHtml = rec.apps.map(a => 
-                            `<li style="margin-bottom: 5px;">
-                                ${a.name} - ${a.objective}
-                            </li>`
-                        ).join('');
-                    }
-                    
-                    // Format videos for PDF
-                    let videosHtml = '';
-                    if (rec.videos && Array.isArray(rec.videos)) {
-                        videosHtml = rec.videos.map(v => 
-                            `<li style="margin-bottom: 5px;">
-                                <a href="${v.url}" style="color: #667eea;">${v.name}</a> - ${v.objective}
-                            </li>`
-                        ).join('');
-                    }
-                    
-                    // Format trabajos for PDF
-                    let trabajosHtml = '';
-                    if (rec.trabajos && Array.isArray(rec.trabajos)) {
-                        trabajosHtml = rec.trabajos.map(t => 
-                            `<li style="margin-bottom: 5px;">
-                                💼 ${t.name} - ${t.objective}
-                            </li>`
-                        ).join('');
-                    }
-                    
-                    return `
-                        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #ffc107;">
-                            <h3 style="color: #856404; margin: 0 0 10px 0;">${comp?.name || rec.competency}</h3>
-                            <p style="margin: 0 0 10px 0;"><strong>Puntuación Actual:</strong> ${rec.score}/10</p>
-                            
-                            <h4 style="margin: 15px 0 10px 0; color: #667eea;">🌐 Recursos Web Recomendados:</h4>
-                            <ul style="margin: 0 0 10px 0;">${websHtml || '<li>No disponible</li>'}</ul>
-                            
-                            <h4 style="margin: 15px 0 10px 0; color: #667eea;">📱 Aplicaciones Útiles:</h4>
-                            <ul style="margin: 0 0 10px 0;">${appsHtml || '<li>No disponible</li>'}</ul>
-                            
-                            <h4 style="margin: 15px 0 10px 0; color: #667eea;">🎥 Videos Educativos:</h4>
-                            <ul style="margin: 0 0 10px 0;">${videosHtml || '<li>No disponible</li>'}</ul>
-                            
-                            <h4 style="margin: 15px 0 10px 0; color: #667eea;">💼 Trabajos Temporales:</h4>
-                            <ul style="margin: 0;">${trabajosHtml || '<li>No disponible</li>'}</ul>
-                        </div>
-                    `;
-                }).join('')}
-            </div>
-            
-            <div style="text-align: center; margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 10px;">
-                <h3 style="margin: 0;">¡Tu futuro comienza hoy!</h3>
-                <p style="margin: 10px 0 0 0;">Usa estos recursos para desarrollar tus competencias y alcanzar tus metas.</p>
-                <p style="margin: 10px 0 0 0; font-size: 12px;">Generado el ${new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-            </div>
-        `;
         
-        // Generate PDF with html2pdf
-        const opt = {
-            margin: 10,
-            filename: `Resultados_${state.personalData.name.replace(/\s+/g, '_')}_2026.pdf`,
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { 
-                scale: 2,
-                useCORS: true,
-                letterRendering: true
-            },
-            jsPDF: { 
-                unit: 'mm', 
-                format: 'a4', 
-                orientation: 'portrait',
-                compress: true
-            },
-            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-        };
-        
-        // Show loading message
-        const btn = document.getElementById('generatePdfBtn');
-        const originalText = btn.innerHTML;
-        btn.innerHTML = '⏳ Generando PDF...';
-        btn.disabled = true;
-        
-        // Wait for chart to render then generate PDF
+        // Wait for chart to fully render
         setTimeout(() => {
-            html2pdf()
-                .set(opt)
-                .from(element)
-                .save()
-                .then(() => {
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
-                    document.body.removeChild(element);
-                    alert('✅ ¡PDF generado exitosamente! Recuerda guardarlo en un lugar seguro.');
+            // Add recommendations with complete format
+            element.innerHTML += `
+                <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <h2 style="color: #856404; border-bottom: 3px solid #856404; padding-bottom: 10px;">💡 Plan de Acción Personalizado</h2>
+                    <p style="margin-bottom: 20px;"><strong>Enfoque:</strong> Mejorar las siguientes competencias clave para alcanzar tus metas</p>
+                    
+                    ${state.recommendations.map(rec => {
+                        const comp = competencies.find(c => c.id === rec.competency);
+                        
+                        // Format webs for PDF
+                        let websHtml = '';
+                        if (rec.webs && Array.isArray(rec.webs)) {
+                            websHtml = rec.webs.map(w => 
+                                `<li style="margin-bottom: 5px;">
+                                    <a href="${w.url}" style="color: #667eea;">${w.name}</a> - ${w.objective}
+                                </li>`
+                            ).join('');
+                        }
+                        
+                        // Format apps for PDF
+                        let appsHtml = '';
+                        if (rec.apps && Array.isArray(rec.apps)) {
+                            appsHtml = rec.apps.map(a => 
+                                `<li style="margin-bottom: 5px;">
+                                    ${a.name} - ${a.objective}
+                                </li>`
+                            ).join('');
+                        }
+                        
+                        // Format videos for PDF
+                        let videosHtml = '';
+                        if (rec.videos && Array.isArray(rec.videos)) {
+                            videosHtml = rec.videos.map(v => 
+                                `<li style="margin-bottom: 5px;">
+                                    <a href="${v.url}" style="color: #667eea;">${v.name}</a> - ${v.objective}
+                                </li>`
+                            ).join('');
+                        }
+                        
+                        // Format trabajos for PDF
+                        let trabajosHtml = '';
+                        if (rec.trabajos && Array.isArray(rec.trabajos)) {
+                            trabajosHtml = rec.trabajos.map(t => 
+                                `<li style="margin-bottom: 5px;">
+                                    💼 ${t.name} - ${t.objective}
+                                </li>`
+                            ).join('');
+                        }
+                        
+                        return `
+                            <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #ffc107;">
+                                <h3 style="color: #856404; margin: 0 0 10px 0;">${comp?.name || rec.competency}</h3>
+                                <p style="margin: 0 0 10px 0;"><strong>Puntuación Actual:</strong> ${rec.score}/10</p>
+                                
+                                <h4 style="margin: 15px 0 10px 0; color: #667eea;">🌐 Recursos Web Recomendados:</h4>
+                                <ul style="margin: 0 0 10px 0;">${websHtml || '<li>No disponible</li>'}</ul>
+                                
+                                <h4 style="margin: 15px 0 10px 0; color: #667eea;">📱 Aplicaciones Útiles:</h4>
+                                <ul style="margin: 0 0 10px 0;">${appsHtml || '<li>No disponible</li>'}</ul>
+                                
+                                <h4 style="margin: 15px 0 10px 0; color: #667eea;">🎥 Videos Educativos:</h4>
+                                <ul style="margin: 0 0 10px 0;">${videosHtml || '<li>No disponible</li>'}</ul>
+                                
+                                <h4 style="margin: 15px 0 10px 0; color: #667eea;">💼 Trabajos Temporales:</h4>
+                                <ul style="margin: 0;">${trabajosHtml || '<li>No disponible</li>'}</ul>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 10px;">
+                    <h3 style="margin: 0;">¡Tu futuro comienza hoy!</h3>
+                    <p style="margin: 10px 0 0 0;">Usa estos recursos para desarrollar tus competencias y alcanzar tus metas.</p>
+                    <p style="margin: 10px 0 0 0; font-size: 12px;">Generado el ${new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                </div>
+            `;
+            
+            // Generate PDF with html2pdf
+            const opt = {
+                margin: 10,
+                filename: `Resultados_${state.personalData.name.replace(/\s+/g, '_')}_2026.pdf`,
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { 
+                    scale: 2,
+                    useCORS: true,
+                    letterRendering: true,
+                    allowTaint: true,
+                    logging: false,
+                    backgroundColor: '#ffffff'
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait',
+                    compress: true
+                },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            };
+            
+            // Show loading message
+            const btn = document.getElementById('generatePdfBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ Generando PDF...';
+            btn.disabled = true;
+            
+            // Wait for all images and styles to load before generating PDF
+            Promise.all([
+                new Promise(resolve => {
+                    if (document.readyState === 'complete') {
+                        resolve();
+                    } else {
+                        window.addEventListener('load', resolve);
+                    }
                 })
-                .catch(err => {
-                    console.error('Error generating PDF:', err);
-                    alert('❌ Error al generar el PDF. Por favor intenta nuevamente.');
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
-                    document.body.removeChild(element);
-                });
-        }, 1000);
-    }, 500);
+            ]).then(() => {
+                // Additional delay to ensure chart is fully rendered
+                setTimeout(() => {
+                    html2pdf()
+                        .set(opt)
+                        .from(element)
+                        .toPdf()
+                        .get('pdf')
+                        .then(function(pdf) {
+                            const totalPages = pdf.internal.getNumberOfPages();
+                            for (let i = 1; i <= totalPages; i++) {
+                                pdf.setPage(i);
+                                pdf.setFontSize(10);
+                                pdf.setTextColor(150);
+                                pdf.text(`Página ${i} de ${totalPages}`, pdf.internal.pageSize.getWidth() / 2, pdf.internal.pageSize.getHeight() - 10, { align: 'center' });
+                            }
+                        })
+                        .save()
+                        .then(() => {
+                            btn.innerHTML = originalText;
+                            btn.disabled = false;
+                            document.body.removeChild(element);
+                            alert('✅ ¡PDF generado exitosamente! Recuerda guardarlo en un lugar seguro.');
+                        })
+                        .catch(err => {
+                            console.error('Error generating PDF:', err);
+                            alert('❌ Error al generar el PDF. Por favor intenta nuevamente.');
+                            btn.innerHTML = originalText;
+                            btn.disabled = false;
+                            document.body.removeChild(element);
+                        });
+                }, 1500);
+            });
+        }, 500);
+    }, 100);
 }
 
 // Override showPage to also display recommendations when navigating there
