@@ -941,74 +941,84 @@ function generatePDF() {
         
         // Wait for chart to fully render
         setTimeout(() => {
-            // Add recommendations with complete format - Black and white version
-            element.innerHTML += `
+            // Build recommendations HTML
+            let recommendationsHtml = '';
+            
+            if (state.recommendations && state.recommendations.length > 0) {
+                recommendationsHtml = state.recommendations.map(rec => {
+                    const comp = competencies.find(c => c.id === rec.competency);
+                    
+                    // Format webs for PDF
+                    let websHtml = '';
+                    if (rec.webs && Array.isArray(rec.webs)) {
+                        websHtml = rec.webs.map(w => 
+                            `<li style="margin-bottom: 5px;">
+                                <a href="${w.url}" style="color: #000; text-decoration: underline;">${w.name}</a> - ${w.objective}
+                            </li>`
+                        ).join('');
+                    }
+                    
+                    // Format apps for PDF
+                    let appsHtml = '';
+                    if (rec.apps && Array.isArray(rec.apps)) {
+                        appsHtml = rec.apps.map(a => 
+                            `<li style="margin-bottom: 5px;">
+                                📱 <a href="${a.url}" style="color: #000; text-decoration: underline;">${a.name}</a> - ${a.objective}
+                            </li>`
+                        ).join('');
+                    }
+                    
+                    // Format videos for PDF
+                    let videosHtml = '';
+                    if (rec.videos && Array.isArray(rec.videos)) {
+                        videosHtml = rec.videos.map(v => 
+                            `<li style="margin-bottom: 5px;">
+                                <a href="${v.url}" style="color: #000; text-decoration: underline;">${v.name}</a> - ${v.objective}
+                            </li>`
+                        ).join('');
+                    }
+                    
+                    // Format trabajos for PDF
+                    let trabajosHtml = '';
+                    if (rec.trabajos && Array.isArray(rec.trabajos)) {
+                        trabajosHtml = rec.trabajos.map(t => 
+                            `<li style="margin-bottom: 5px;">
+                                💼 ${t.name} - ${t.objective}
+                            </li>`
+                        ).join('');
+                    }
+                    
+                    return `
+                        <div style="background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #000; border: 1px solid #000;">
+                            <h3 style="color: #000; margin: 0 0 10px 0;">${comp?.name || rec.competency}</h3>
+                            <p style="margin: 0 0 10px 0;"><strong>Puntuación Actual:</strong> ${rec.score}/10</p>
+                            
+                            <h4 style="margin: 15px 0 10px 0; color: #000;">🌐 Recursos Web Recomendados:</h4>
+                            <ul style="margin: 0 0 10px 0;">${websHtml || '<li>No disponible</li>'}</ul>
+                            
+                            <h4 style="margin: 15px 0 10px 0; color: #000;">📱 Aplicaciones Útiles:</h4>
+                            <ul style="margin: 0 0 10px 0;">${appsHtml || '<li>No disponible</li>'}</ul>
+                            
+                            <h4 style="margin: 15px 0 10px 0; color: #000;">🎥 Videos Educativos:</h4>
+                            <ul style="margin: 0 0 10px 0;">${videosHtml || '<li>No disponible</li>'}</ul>
+                            
+                            <h4 style="margin: 15px 0 10px 0; color: #000;">💼 Trabajos Temporales:</h4>
+                            <ul style="margin: 0;">${trabajosHtml || '<li>No disponible</li>'}</ul>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                recommendationsHtml = '<p>No hay recomendaciones disponibles.</p>';
+            }
+            
+            // Add recommendations section
+            const recommendationsContainer = document.createElement('div');
+            recommendationsContainer.innerHTML = `
                 <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #000;">
                     <h2 style="color: #000; border-bottom: 3px solid #000; padding-bottom: 10px;">💡 Plan de Acción Personalizado</h2>
                     <p style="margin-bottom: 20px;"><strong>Enfoque:</strong> Mejorar las siguientes competencias clave para alcanzar tus metas</p>
                     
-                    ${state.recommendations.map(rec => {
-                        const comp = competencies.find(c => c.id === rec.competency);
-                        
-                        // Format webs for PDF
-                        let websHtml = '';
-                        if (rec.webs && Array.isArray(rec.webs)) {
-                            websHtml = rec.webs.map(w => 
-                                `<li style="margin-bottom: 5px;">
-                                    <a href="${w.url}" style="color: #0066cc; text-decoration: underline;">${w.name}</a> - ${w.objective}
-                                </li>`
-                            ).join('');
-                        }
-                        
-                        // Format apps for PDF
-                        let appsHtml = '';
-                        if (rec.apps && Array.isArray(rec.apps)) {
-                            appsHtml = rec.apps.map(a => 
-                                `<li style="margin-bottom: 5px;">
-                                    ${a.name} - ${a.objective}
-                                </li>`
-                            ).join('');
-                        }
-                        
-                        // Format videos for PDF
-                        let videosHtml = '';
-                        if (rec.videos && Array.isArray(rec.videos)) {
-                            videosHtml = rec.videos.map(v => 
-                                `<li style="margin-bottom: 5px;">
-                                    <a href="${v.url}" style="color: #0066cc; text-decoration: underline;">${v.name}</a> - ${v.objective}
-                                </li>`
-                            ).join('');
-                        }
-                        
-                        // Format trabajos for PDF
-                        let trabajosHtml = '';
-                        if (rec.trabajos && Array.isArray(rec.trabajos)) {
-                            trabajosHtml = rec.trabajos.map(t => 
-                                `<li style="margin-bottom: 5px;">
-                                    💼 ${t.name} - ${t.objective}
-                                </li>`
-                            ).join('');
-                        }
-                        
-                        return `
-                            <div style="background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #000; border: 1px solid #000;">
-                                <h3 style="color: #000; margin: 0 0 10px 0;">${comp?.name || rec.competency}</h3>
-                                <p style="margin: 0 0 10px 0;"><strong>Puntuación Actual:</strong> ${rec.score}/10</p>
-                                
-                                <h4 style="margin: 15px 0 10px 0; color: #000;">🌐 Recursos Web Recomendados:</h4>
-                                <ul style="margin: 0 0 10px 0;">${websHtml || '<li>No disponible</li>'}</ul>
-                                
-                                <h4 style="margin: 15px 0 10px 0; color: #000;">📱 Aplicaciones Útiles:</h4>
-                                <ul style="margin: 0 0 10px 0;">${appsHtml || '<li>No disponible</li>'}</ul>
-                                
-                                <h4 style="margin: 15px 0 10px 0; color: #000;">🎥 Videos Educativos:</h4>
-                                <ul style="margin: 0 0 10px 0;">${videosHtml || '<li>No disponible</li>'}</ul>
-                                
-                                <h4 style="margin: 15px 0 10px 0; color: #000;">💼 Trabajos Temporales:</h4>
-                                <ul style="margin: 0;">${trabajosHtml || '<li>No disponible</li>'}</ul>
-                            </div>
-                        `;
-                    }).join('')}
+                    ${recommendationsHtml}
                 </div>
                 
                 <div style="text-align: center; margin-top: 30px; padding: 20px; background: #000; color: #fff; border-radius: 10px;">
@@ -1017,6 +1027,8 @@ function generatePDF() {
                     <p style="margin: 10px 0 0 0; font-size: 12px;">Generado el ${new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
                 </div>
             `;
+            
+            element.appendChild(recommendationsContainer);
             
             // Generate PDF with html2pdf
             const opt = {
