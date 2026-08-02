@@ -148,9 +148,11 @@ const recommendationsDB = {
             { name: 'Psychology Today - Problem Solving', url: 'https://www.psychologytoday.com/us/blog/a-deeper-wellness/202307/problem-solving-understanding-and-dealing-with-challenges', objective: 'Enfoque psicológico' }
         ],
         apps: [
-            { name: 'Neuro Nation', url: 'https://play.google.com/store/apps/details?id=air.nn.mobile.app.main&hl=es', objective: 'Ejercicos Mentales' },
-            { name: 'Mind Master', url: 'https://play.google.com/store/apps/details?id=com.appsynergy.mindmaster', objective: 'Entrena tu mente' },
-            { name: 'Critical Thinking Coach', url: 'https://play.google.com/store/apps/details?id=com.critical.thinking.coach&hl=es_PE', objective: 'Retos mentales diarios' }
+            { name: 'Simple MInd', url: 'https://play.google.com/store/apps/details?id=com.modelmakertools.simplemindfree&hl=es', objective: 'Mapas Mentales' },
+            { name: 'Moral Machine', url: 'https://www.moralmachine.net/hl/es', objective: 'Toma de Decisiones Profundas' },
+            { name: 'Virtonomics', url: 'https://virtonomics.com/blogs/lang/es/juegos-de-negocios-gratuitos-populares/', objective: 'Juegos de Negocios' },
+            { name: 'Plague Inc', url: 'https://play.google.com/store/apps/details?id=com.miniclip.plagueinc', objective: 'Infecta al Mundo' },
+            
         ],
         videos: [
             { name: 'TED - Resuelve problemas bajo presión', url: 'https://www.youtube.com/watch?v=WzxUDrXv3fA', objective: 'Estrategias rápidas' },
@@ -169,9 +171,9 @@ const recommendationsDB = {
             { name: 'Coursera - Pensamiento Crítico', url: 'https://coursera.org', objective: 'Desarrollar habilidades de análisis crítico' }
         ],
         apps: [
-            { name: 'Brilliant', url: 'https://brilliant.org', objective: 'Razonamiento lógico interactivo' },
-            { name: 'Curiosity', url: 'https://curiosity.com', objective: 'Aprendizaje continuo' },
-            { name: 'Blinkist', url: 'https://blinkist.com', objective: 'Resúmenes de libros clave' }
+            { name: 'Neuro Nation', url: 'https://play.google.com/store/apps/details?id=air.nn.mobile.app.main&hl=es', objective: 'Ejercicos Mentales' },
+            { name: 'Mind Master', url: 'https://play.google.com/store/apps/details?id=com.appsynergy.mindmaster', objective: 'Entrena tu mente' },
+            { name: 'Critical Thinking Coach', url: 'https://play.google.com/store/apps/details?id=com.critical.thinking.coach&hl=es_PE', objective: 'Retos mentales diarios' }
         ],
         videos: [
             { name: 'TED - Mejora tu pensamiento crítico', url: 'https://www.youtube.com/watch?v=6OLQVR5R-fg', objective: 'Herramientas prácticas' },
@@ -184,16 +186,14 @@ const recommendationsDB = {
     },
     liderazgo: {
         webs: [
-            { name: 'BusinessBalls - Liderazgo y Gerencia', url: 'https://www.businessballs.com/', objective: 'Artículos ligeros de liderazgo' },
             { name: 'Ejerciendo Liderazgo - Harvard', url: 'https://harvardonline.harvard.edu/course/exercising-leadership-foundational-principles', objective: 'Principios Fundamentales' },
             { name: 'Liderazgo sin temor - Harvard', url: 'https://www.edx.org/learn/business-management/harvard-university-purpose-perspective-and-persuasion', objective: 'Propósito, Perspectiva y Persuasión' },
             { name: 'Oxford - Cualidades de Liderazgo', url: 'https://www.oxfordhomestudy.com/courses/leadership-courses-online/certification-in-leadership-and-management', objective: 'Cualidades de un líder' },
             { name: 'Business Simulations', url: 'https://businesssimulations.com/insights/articles/five-great-mobile-phone-apps-for-leadership-development-all-free-too/', objective: 'Desarrollo de Liderazgo' }
         ],
         apps: [
-            { name: 'Bunch', url: 'https://www.bunch.ai/blog/improve-leadership-skills-app', objective: 'Desarrollo de habilidades de Liderazgo' },
-            { name: 'Leadercast', url: 'https://leadercast.com', objective: 'Podcasts de liderazgo' },
-            { name: 'Harvard Business Review', url: 'https://hbr.org', objective: 'Artículos de gestión' }
+            { name: 'SC training', url: 'https://training.safetyculture.com/es/', objective: 'Desarrollo de habilidades de Liderazgo' },
+            { name: 'Business Simulation', url: 'https://businesssimulations.com/insights/articles/five-great-mobile-phone-apps-for-leadership-development-all-free-too/', objective: 'Modelos de Empresa' }
         ],
         videos: [
             { name: 'TED - Líderes que inspiran', url: 'https://www.youtube.com/watch?v=4bcB5FJq80Q', objective: 'Observar estilos de liderazgo efectivo' },
@@ -211,9 +211,10 @@ const recommendationsDB = {
             { name: 'AnahucX - Inteligencia Emocional', url: 'https://www.edx.org/learn/leadership/universidades-anahuac-inteligencia-emocional-para-el-liderazgo-efectivo-y-colaboracion', objective: 'Inteligencia Emocional para el Liderazgo' }
         ],
         apps: [
-            { name: 'Headspace', url: 'https://headspace.com', objective: 'Meditación y mindfulness' },
-            { name: 'Calm', url: 'https://calm.com', objective: 'Relajación y sueño' },
-            { name: 'Sanvello', url: 'https://sanvello.com', objective: 'Manejo de ansiedad y estrés' }
+            { name: 'Insight Timer', url: 'https://play.google.com/store/apps/details?id=com.spotlightsix.zentimerlite2&hl=es', objective: 'Meditación y mindfulness' },
+            { name: 'Proyecto Europeo', url: 'https://www.cope-euproject.eu/es/sobre-el-proyecto/practicar-resiliencia/', objective: 'Desarrollar Resilencia' },
+            { name: 'Modelol Stoico', url: 'https://play.google.com/store/apps/details?id=com.stoicroutine.stoic&hl=es_PE', objective: 'Salud Mental' },
+            { name: 'Yana', url: 'https://play.google.com/store/apps/details?id=com.yanaapp&hl=es_PE', objective: 'Salud Mental con IA' }
         ],
         videos: [
             { name: 'TED - Adapta tu mente para prosperar', url: 'https://www.youtube.com/watch?v=STeRsNSJwVE', objective: 'Flexibilidad mental' },
@@ -226,14 +227,14 @@ const recommendationsDB = {
     },
     gestion_tiempo: {
         webs: [
-            { name: 'Todoist - Métodos de Productividad', url: 'https://todoist.com/es/productivity-methods', objective: 'Técnicas probadas' },
-            { name: 'RescueTime', url: 'https://www.rescuetime.com/', objective: 'Análisis de uso del tiempo' },
-            { name: 'MindTools - Time Management', url: 'https://www.mindtools.com/pages/main/newMN_HTE.htm', objective: 'Herramientas de gestión' }
+            { name: 'Tareas mas Importantes', url: 'https://es.linkedin.com/advice/3/how-can-you-use-mit-method-prioritize-your-tasks-lk8cf?lang=es&lang=es', objective: 'Metodo MIT' },
+            { name: 'Tiempo y Efectividad', url: 'https://www.edx.org/learn/time-management/pontificia-universidad-javeriana-uso-efectivo-del-tiempo', objective: 'Universidad Jaleriana' },
+            { name: 'Oxford - Time Management', url: 'https://www.oxfordhomestudy.com/courses/online-management-courses/time-management-free-courses', objective: 'Herramientas de gestión' }
         ],
         apps: [
-            { name: 'Todoist', url: 'https://todoist.com', objective: 'Lista de tareas inteligente' },
-            { name: 'Notion', url: 'https://notion.so', objective: 'Espacio de trabajo todo-en-uno' },
-            { name: 'Forest', url: 'https://forest.cc', objective: 'Enfoque sin distracciones' }
+            { name: 'Google Tasks', url: 'https://play.google.com/store/apps/details?id=com.google.android.apps.tasks&hl=es_PE', objective: 'Organizador de Tareas' },
+            { name: 'MIcrosoft To DO', url: 'https://apps.microsoft.com/detail/9nblggh5r558?hl=es-ES&gl=ES', objective: 'Organizador' },
+            { name: 'Clockify', url: 'https://clockify.me/es/', objective: 'Controlador de Tiempo para grupos' }
         ],
         videos: [
             { name: 'TED - Gestiona tu tiempo como tu carrera', url: 'https://www.youtube.com/watch?v=Oj-h1z5jjM0', objective: 'Planificación estratégica' },
@@ -246,14 +247,14 @@ const recommendationsDB = {
     },
     creatividad: {
         webs: [
-            { name: 'CreativeLive', url: 'https://www.creative-live.com/', objective: 'Cursos creativos' },
-            { name: 'Behance', url: 'https://www.behance.net/', objective: 'Portafolio e inspiración' },
-            { name: 'Dribbble', url: 'https://dribbble.com', objective: 'Diseño y creatividad visual' }
+            { name: 'Crative Thinking - Oxford', url: 'https://www.oxfordhomestudy.com/courses/train-the-trainer-courses/creative-thinking-courses', objective: 'Pensamiento creativo' },
+            { name: 'Harvard -Deusto', url: 'https://www.harvard-deusto.com/innovacion-y-creatividad', objective: 'Innovación y Creatividad' },
+            { name: 'MIT Innovadores y Emprendedores', url: 'https://openlearning.mit.edu/news/free-online-courses-mit-entrepreneurs-and-innovators', objective: 'Emprendimiento e Innovación' }
         ],
         apps: [
-            { name: 'Canva', url: 'https://canva.com', objective: 'Diseño gráfico accesible' },
-            { name: 'Procreate', url: 'https://procreate.art', objective: 'Ilustración digital' },
-            { name: 'Adobe Creative Cloud', url: 'https://adobe.com', objective: 'Suite creativa profesional' }
+            { name: 'Kreative', url: 'https://play.google.com/store/apps/details?id=com.aya.idea_generator&hl=es_PE', objective: 'Crear Ideas' },
+            { name: 'Oblique Strategies', url: 'https://play.google.com/store/apps/details?id=com.monoloco.obliquestrategies', objective: 'Rompe Bloqueos Mentales' },
+            { name: 'Brainstormer', url: 'https://play.google.com/store/apps/details?id=me.cendre.brainstorming.android&hl=es_PE', objective: 'Lluvia de Ideas' }
         ],
         videos: [
             { name: 'TED - Tu cuerpo moldea tu creatividad', url: 'https://www.youtube.com/watch?v=z25yMTHkRY0', objective: 'Conexión cuerpo-mente' },
