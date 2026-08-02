@@ -100,47 +100,171 @@ const quizQuestions = [
     }
 ];
 
-// Recommendations database
+// Recommendations database - Complete information from original version
 const recommendationsDB = {
     comunicacion: {
-        webs: ['https://www.coursera.org/courses?query=comunicacion', 'https://www.edx.org/learn/communication'],
-        apps: ['Duolingo', 'TED', 'Grammarly'],
-        videos: ['https://www.youtube.com/watch?v=Hp8u-V9cIy0', 'https://www.youtube.com/watch?v=HAnw168huqA']
+        webs: [
+            { name: 'Harvard Online - edX', url: 'https://harvardonline.harvard.edu/program/leadership-and-communication', objective: 'Liderazgo y Comunicación (gratis sin certificado)' },
+            { name: 'LinkedIn Learning - Comunicación', url: 'https://es.linkedin.com/learning/topics/comunicacion', objective: 'Mejorar habilidades comunicativas' },
+            { name: 'Oxford Home Study', url: 'https://www.oxfordhomestudy.com/courses/customer-service-courses-online/free-communication-skills-courses', objective: 'Habilidades de Comunicación' },
+            { name: 'Meetup', url: 'https://meetup.com', objective: 'Practicar networking social (siempre sé PRUDENTE)' }
+        ],
+        apps: [
+            { name: 'Habilidades Sociales', url: 'https://play.google.com/store/apps/details/Habilidades_Sociales?id=com.fasabeteam.habilidadessociales&hl=es_PE', objective: 'Conceptos Actuales' },
+            { name: 'Social Skills', url: 'https://play.google.com/store/apps/details?id=in.softecks.socialskills&hl=es_PE', objective: 'Aprendizaje Completo' },
+            { name: 'TED', url: 'https://ted.com', objective: 'Charlas inspiradoras sobre comunicación' }
+        ],
+        videos: [
+            { name: 'TED - El poder de la vulnerabilidad - Brené Brown', url: 'https://www.ted.com/talks/brene_brown_the_power_of_vulnerability', objective: 'Comprender conexión humana' },
+            { name: 'TED - 5 consejos para mejorar su pensamiento crítico', url: 'https://www.youtube.com/watch?v=YO4pwpaH8Fo', objective: 'Mejora tu análisis' }
+        ],
+        trabajos: [
+            { name: 'Voluntariado comunitario', objective: 'Practicar empatía y trabajo en equipo' },
+            { name: 'Atención al cliente', objective: 'Desarrollar comunicación asertiva' }
+        ]
     },
     trabajo_equipo: {
-        webs: ['https://www.linkedin.com/learning/topics/teamwork', 'https://www.skillshare.com/browse/teamwork'],
-        apps: ['Trello', 'Slack', 'Microsoft Teams'],
-        videos: ['https://www.youtube.com/watch?v=5qap5aO4i9A', 'https://www.youtube.com/watch?v=ibmImRxW7aE']
+        webs: [
+            { name: 'LinkedIn Learning - Teamwork', url: 'https://www.linkedin.com/learning/topics/teamwork', objective: 'Trabajo en equipo efectivo' },
+            { name: 'Skillshare - Teamwork', url: 'https://www.skillshare.com/browse/teamwork', objective: 'Colaboración en proyectos' },
+            { name: 'MindTools - Team Building', url: 'https://www.mindtools.com/pages/main/mnuTeamBuilding.asp', objective: 'Dinámicas de grupo' }
+        ],
+        apps: [
+            { name: 'Trello', url: 'https://trello.com', objective: 'Gestión colaborativa de tareas' },
+            { name: 'Slack', url: 'https://slack.com', objective: 'Comunicación en equipo' },
+            { name: 'Microsoft Teams', url: 'https://teams.microsoft.com', objective: 'Colaboración empresarial' }
+        ],
+        videos: [
+            { name: 'TED - La importancia del trabajo en equipo', url: 'https://www.youtube.com/watch?v=5qap5aO4i9A', objective: 'Valor de la colaboración' },
+            { name: 'TED - Cómo construir equipos de alto rendimiento', url: 'https://www.youtube.com/watch?v=ibmImRxW7aE', objective: 'Equipos efectivos' }
+        ],
+        trabajos: [
+            { name: 'Proyectos grupales universitarios', objective: 'Practicar colaboración académica' },
+            { name: 'Deportes de equipo', objective: 'Desarrollar coordinación grupal' }
+        ]
     },
     resolucion_problemas: {
-        webs: ['https://www.khanacademy.org/computing/computer-science/algorithms', 'https://www.brightermondays.com/problem-solving/'],
-        apps: ['Lumosity', 'Elevate', 'Peak'],
-        videos: ['https://www.youtube.com/watch?v=WzxUDrXv3fA', 'https://www.youtube.com/watch?v=KpFOdXPnZnE']
+        webs: [
+            { name: 'Khan Academy - Algoritmos', url: 'https://www.khanacademy.org/computing/computer-science/algorithms', objective: 'Pensamiento algorítmico' },
+            { name: 'Brighter Mondays - Problem Solving', url: 'https://www.brightermondays.com/problem-solving/', objective: 'Técnicas de resolución' },
+            { name: 'Psychology Today - Problem Solving', url: 'https://www.psychologytoday.com/us/basics/problem-solving', objective: 'Enfoque psicológico' }
+        ],
+        apps: [
+            { name: 'Lumosity', url: 'https://lumosity.com', objective: 'Entrenamiento cognitivo' },
+            { name: 'Elevate', url: 'https://elevateapp.com', objective: 'Mejorar procesamiento mental' },
+            { name: 'Peak', url: 'https://peak.net', objective: 'Retos mentales diarios' }
+        ],
+        videos: [
+            { name: 'TED - Resuelve problemas bajo presión', url: 'https://www.youtube.com/watch?v=WzxUDrXv3fA', objective: 'Estrategias rápidas' },
+            { name: 'TED - El arte de resolver problemas complejos', url: 'https://www.youtube.com/watch?v=KpFOdXPnZnE', objective: 'Análisis sistemático' }
+        ],
+        trabajos: [
+            { name: 'Soporte técnico', objective: 'Resolver incidencias técnicas' },
+            { name: 'Analista de datos junior', objective: 'Identificar patrones y soluciones' }
+        ]
     },
     pensamiento_critico: {
-        webs: ['https://www.criticalthinking.org/', 'https://plato.stanford.edu/entries/critical-thinking/'],
-        apps: ['Brilliant', 'Curiosity', 'Blinkist'],
-        videos: ['https://www.youtube.com/watch?v=6OLQVR5R-fg', 'https://www.youtube.com/watch?v=M71YUo8Gjzg']
+        webs: [
+            { name: 'Critical Thinking Institute', url: 'https://www.criticalthinking.org/', objective: 'Fundamentos del pensamiento crítico' },
+            { name: 'Stanford Encyclopedia', url: 'https://plato.stanford.edu/entries/critical-thinking/', objective: 'Teoría profunda' },
+            { name: 'Harvard Online - Critical Thinking', url: 'https://harvardonline.harvard.edu/course/structure-function-argument-introduction-critical-thinking-0', objective: 'Introducción al pensamiento crítico (gratis sin certificado)' },
+            { name: 'Coursera - Pensamiento Crítico', url: 'https://coursera.org', objective: 'Desarrollar habilidades de análisis crítico' }
+        ],
+        apps: [
+            { name: 'Brilliant', url: 'https://brilliant.org', objective: 'Razonamiento lógico interactivo' },
+            { name: 'Curiosity', url: 'https://curiosity.com', objective: 'Aprendizaje continuo' },
+            { name: 'Blinkist', url: 'https://blinkist.com', objective: 'Resúmenes de libros clave' }
+        ],
+        videos: [
+            { name: 'TED - Mejora tu pensamiento crítico', url: 'https://www.youtube.com/watch?v=6OLQVR5R-fg', objective: 'Herramientas prácticas' },
+            { name: 'TED - Esta herramienta te ayudará a mejorar tu pensamiento crítico', url: 'https://www.youtube.com/watch?v=7C3XUy3BYug', objective: 'Herramienta valiosa' }
+        ],
+        trabajos: [
+            { name: 'Asistente de investigación', objective: 'Practicar análisis de datos' },
+            { name: 'Tutor académico', objective: 'Desarrollar explicación de conceptos complejos' }
+        ]
     },
     liderazgo: {
-        webs: ['https://www.leadershipinstitute.org/', 'https://www.mindtools.com/pages/main/mnuLeadership.asp'],
-        apps: ['Leadercast', 'Harvard Business Review', 'Coach\'s Eye'],
-        videos: ['https://www.youtube.com/watch?v=NyoT1k3SMAM', 'https://www.youtube.com/watch?v=L_Jp0b4hIkw']
+        webs: [
+            { name: 'BusinessBalls - Liderazgo y Gerencia', url: 'https://www.businessballs.com/', objective: 'Artículos ligeros de liderazgo' },
+            { name: 'Ejerciendo Liderazgo - Harvard', url: 'https://harvardonline.harvard.edu/course/exercising-leadership-foundational-principles', objective: 'Principios Fundamentales' },
+            { name: 'Liderazgo sin temor - Harvard', url: 'https://www.edx.org/learn/business-management/harvard-university-purpose-perspective-and-persuasion', objective: 'Propósito, Perspectiva y Persuasión' },
+            { name: 'Oxford - Cualidades de Liderazgo', url: 'https://www.oxfordhomestudy.com/courses/leadership-courses-online/certification-in-leadership-and-management', objective: 'Cualidades de un líder' },
+            { name: 'Business Simulations', url: 'https://businesssimulations.com/insights/articles/five-great-mobile-phone-apps-for-leadership-development-all-free-too/', objective: 'Desarrollo de Liderazgo' }
+        ],
+        apps: [
+            { name: 'Bunch', url: 'https://www.bunch.ai/blog/improve-leadership-skills-app', objective: 'Desarrollo de habilidades de Liderazgo' },
+            { name: 'Leadercast', url: 'https://leadercast.com', objective: 'Podcasts de liderazgo' },
+            { name: 'Harvard Business Review', url: 'https://hbr.org', objective: 'Artículos de gestión' }
+        ],
+        videos: [
+            { name: 'TED - Líderes que inspiran', url: 'https://www.youtube.com/watch?v=4bcB5FJq80Q', objective: 'Observar estilos de liderazgo efectivo' },
+            { name: 'TED - Cómo motivar a tu equipo', url: 'https://www.youtube.com/watch?v=NyoT1k3SMAM', objective: 'Motivación efectiva' }
+        ],
+        trabajos: [
+            { name: 'Líder de proyecto universitario', objective: 'Practicar gestión de equipos' },
+            { name: 'Coordinador de evento', objective: 'Desarrollar organización y delegación' }
+        ]
     },
     adaptabilidad: {
-        webs: ['https://www.psychologytoday.com/us/basics/adaptability', 'https://greatergood.berkeley.edu/topic/resilience'],
-        apps: ['Headspace', 'Calm', 'Sanvello'],
-        videos: ['https://www.youtube.com/watch?v=STeRsNSJwVE', 'https://www.youtube.com/watch?v=4KMlO2dkLBE']
+        webs: [
+            { name: 'Psychology Today - Adaptability', url: 'https://www.psychologytoday.com/us/basics/adaptability', objective: 'Fundamentos de adaptabilidad' },
+            { name: 'Greater Good Science Center', url: 'https://greatergood.berkeley.edu/topic/resilience', objective: 'Ciencia de la resiliencia' },
+            { name: 'AnahucX - Inteligencia Emocional', url: 'https://www.edx.org/learn/leadership/universidades-anahuac-inteligencia-emocional-para-el-liderazgo-efectivo-y-colaboracion', objective: 'Inteligencia Emocional para el Liderazgo' }
+        ],
+        apps: [
+            { name: 'Headspace', url: 'https://headspace.com', objective: 'Meditación y mindfulness' },
+            { name: 'Calm', url: 'https://calm.com', objective: 'Relajación y sueño' },
+            { name: 'Sanvello', url: 'https://sanvello.com', objective: 'Manejo de ansiedad y estrés' }
+        ],
+        videos: [
+            { name: 'TED - Adapta tu mente para prosperar', url: 'https://www.youtube.com/watch?v=STeRsNSJwVE', objective: 'Flexibilidad mental' },
+            { name: 'TED - El estrés puede ser tu amigo', url: 'https://www.youtube.com/watch?v=RcGyVTAoXEU', objective: 'Convierte el estrés en tu amigo' }
+        ],
+        trabajos: [
+            { name: 'Trabajos por proyectos', objective: 'Adaptarse a diferentes entornos' },
+            { name: 'Viajes de intercambio', objective: 'Experiencia cultural diversa' }
+        ]
     },
     gestion_tiempo: {
-        webs: ['https://todoist.com/es/productivity-methods', 'https://www.rescuetime.com/'],
-        apps: ['Todoist', 'Notion', 'Forest'],
-        videos: ['https://www.youtube.com/watch?v=Oj-h1z5jjM0', 'https://www.youtube.com/watch?v=VPVDiS5-8hI']
+        webs: [
+            { name: 'Todoist - Métodos de Productividad', url: 'https://todoist.com/es/productivity-methods', objective: 'Técnicas probadas' },
+            { name: 'RescueTime', url: 'https://www.rescuetime.com/', objective: 'Análisis de uso del tiempo' },
+            { name: 'MindTools - Time Management', url: 'https://www.mindtools.com/pages/main/newMN_HTE.htm', objective: 'Herramientas de gestión' }
+        ],
+        apps: [
+            { name: 'Todoist', url: 'https://todoist.com', objective: 'Lista de tareas inteligente' },
+            { name: 'Notion', url: 'https://notion.so', objective: 'Espacio de trabajo todo-en-uno' },
+            { name: 'Forest', url: 'https://forest.cc', objective: 'Enfoque sin distracciones' }
+        ],
+        videos: [
+            { name: 'TED - Gestiona tu tiempo como tu carrera', url: 'https://www.youtube.com/watch?v=Oj-h1z5jjM0', objective: 'Planificación estratégica' },
+            { name: 'TED - Técnicas de gestión del tiempo', url: 'https://www.youtube.com/watch?v=VPVDiS5-8hI', objective: 'Métodos prácticos' }
+        ],
+        trabajos: [
+            { name: 'Asistente administrativo', objective: 'Organizar agendas y prioridades' },
+            { name: 'Planificador de eventos', objective: 'Coordinar múltiples tareas' }
+        ]
     },
     creatividad: {
-        webs: ['https://www.creative-live.com/', 'https://www.behance.net/'],
-        apps: ['Canva', 'Procreate', 'Adobe Creative Cloud'],
-        videos: ['https://www.youtube.com/watch?v=z25yMTHkRY0', 'https://www.youtube.com/watch?v=ZnYWWouUoVA']
+        webs: [
+            { name: 'CreativeLive', url: 'https://www.creative-live.com/', objective: 'Cursos creativos' },
+            { name: 'Behance', url: 'https://www.behance.net/', objective: 'Portafolio e inspiración' },
+            { name: 'Dribbble', url: 'https://dribbble.com', objective: 'Diseño y creatividad visual' }
+        ],
+        apps: [
+            { name: 'Canva', url: 'https://canva.com', objective: 'Diseño gráfico accesible' },
+            { name: 'Procreate', url: 'https://procreate.art', objective: 'Ilustración digital' },
+            { name: 'Adobe Creative Cloud', url: 'https://adobe.com', objective: 'Suite creativa profesional' }
+        ],
+        videos: [
+            { name: 'TED - Tu cuerpo moldea tu creatividad', url: 'https://www.youtube.com/watch?v=z25yMTHkRY0', objective: 'Conexión cuerpo-mente' },
+            { name: 'TED - Hábitos de las personas creativas', url: 'https://www.youtube.com/watch?v=ZnYWWouUoVA', objective: 'Rutinas creativas' }
+        ],
+        trabajos: [
+            { name: 'Diseñador freelance', objective: 'Proyectos creativos variados' },
+            { name: 'Redactor de contenidos', objective: 'Generar ideas originales' }
+        ]
     }
 };
 
@@ -605,9 +729,49 @@ function displayRecommendations() {
         const col = document.createElement('div');
         col.className = 'col-lg-4';
         
-        let websHtml = rec.webs.map(url => `<li><a href="${url}" target="_blank" class="text-decoration-none">🔗 Recurso Web</a></li>`).join('');
-        let appsHtml = rec.apps.map(app => `<li>📱 ${app}</li>`).join('');
-        let videosHtml = rec.videos.map(url => `<li><a href="${url}" target="_blank" class="text-decoration-none">🎥 Video Recomendado</a></li>`).join('');
+        // Format webs with names and objectives
+        let websHtml = '';
+        if (rec.webs && Array.isArray(rec.webs)) {
+            websHtml = rec.webs.map(w => 
+                `<li class="mb-2 ps-3">
+                    <a href="${w.url}" target="_blank" class="text-decoration-none fw-bold">➡️ ${w.name}</a>
+                    <br><small class="text-muted">📌 ${w.objective}</small>
+                </li>`
+            ).join('');
+        }
+        
+        // Format apps with names and objectives
+        let appsHtml = '';
+        if (rec.apps && Array.isArray(rec.apps)) {
+            appsHtml = rec.apps.map(a => 
+                `<li class="mb-2 ps-3">
+                    <a href="${a.url || '#'}" target="_blank" class="text-decoration-none fw-bold">📲 ${a.name}</a>
+                    <br><small class="text-muted">📌 ${a.objective}</small>
+                </li>`
+            ).join('');
+        }
+        
+        // Format videos with names and objectives
+        let videosHtml = '';
+        if (rec.videos && Array.isArray(rec.videos)) {
+            videosHtml = rec.videos.map(v => 
+                `<li class="mb-2 ps-3">
+                    <a href="${v.url}" target="_blank" class="text-decoration-none fw-bold">▶️ ${v.name}</a>
+                    <br><small class="text-muted">📌 ${v.objective}</small>
+                </li>`
+            ).join('');
+        }
+        
+        // Format trabajos with names and objectives
+        let trabajosHtml = '';
+        if (rec.trabajos && Array.isArray(rec.trabajos)) {
+            trabajosHtml = rec.trabajos.map(t => 
+                `<li class="mb-2 ps-3">
+                    <strong>💼 ${t.name}</strong>
+                    <br><small class="text-muted">📌 ${t.objective}</small>
+                </li>`
+            ).join('');
+        }
         
         col.innerHTML = `
             <div class="card h-100 shadow-sm border-warning">
@@ -617,13 +781,16 @@ function displayRecommendations() {
                 </div>
                 <div class="card-body">
                     <h6 class="fw-bold">🌐 Páginas Web:</h6>
-                    <ul class="list-unstyled">${websHtml}</ul>
+                    <ul class="list-unstyled">${websHtml || '<li class="text-muted">No hay recursos web disponibles</li>'}</ul>
                     
                     <h6 class="fw-bold mt-3">📱 Aplicaciones:</h6>
-                    <ul class="list-unstyled">${appsHtml}</ul>
+                    <ul class="list-unstyled">${appsHtml || '<li class="text-muted">No hay aplicaciones disponibles</li>'}</ul>
                     
                     <h6 class="fw-bold mt-3">🎥 Videos:</h6>
-                    <ul class="list-unstyled">${videosHtml}</ul>
+                    <ul class="list-unstyled">${videosHtml || '<li class="text-muted">No hay videos disponibles</li>'}</ul>
+                    
+                    <h6 class="fw-bold mt-3">💼 Trabajos Temporales:</h6>
+                    <ul class="list-unstyled">${trabajosHtml || '<li class="text-muted">No hay trabajos sugeridos</li>'}</ul>
                 </div>
             </div>
         `;
@@ -737,7 +904,7 @@ function generatePDF() {
         }
     });
     
-    // Add recommendations
+    // Add recommendations with complete format
     element.innerHTML += `
         <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
             <h2 style="color: #856404; border-bottom: 3px solid #856404; padding-bottom: 10px;">💡 Plan de Acción Personalizado</h2>
@@ -745,25 +912,63 @@ function generatePDF() {
             
             ${state.recommendations.map(rec => {
                 const comp = competencies.find(c => c.id === rec.competency);
+                
+                // Format webs for PDF
+                let websHtml = '';
+                if (rec.webs && Array.isArray(rec.webs)) {
+                    websHtml = rec.webs.map(w => 
+                        `<li style="margin-bottom: 5px;">
+                            <a href="${w.url}" style="color: #667eea;">${w.name}</a> - ${w.objective}
+                        </li>`
+                    ).join('');
+                }
+                
+                // Format apps for PDF
+                let appsHtml = '';
+                if (rec.apps && Array.isArray(rec.apps)) {
+                    appsHtml = rec.apps.map(a => 
+                        `<li style="margin-bottom: 5px;">
+                            ${a.name} - ${a.objective}
+                        </li>`
+                    ).join('');
+                }
+                
+                // Format videos for PDF
+                let videosHtml = '';
+                if (rec.videos && Array.isArray(rec.videos)) {
+                    videosHtml = rec.videos.map(v => 
+                        `<li style="margin-bottom: 5px;">
+                            <a href="${v.url}" style="color: #667eea;">${v.name}</a> - ${v.objective}
+                        </li>`
+                    ).join('');
+                }
+                
+                // Format trabajos for PDF
+                let trabajosHtml = '';
+                if (rec.trabajos && Array.isArray(rec.trabajos)) {
+                    trabajosHtml = rec.trabajos.map(t => 
+                        `<li style="margin-bottom: 5px;">
+                            💼 ${t.name} - ${t.objective}
+                        </li>`
+                    ).join('');
+                }
+                
                 return `
                     <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #ffc107;">
                         <h3 style="color: #856404; margin: 0 0 10px 0;">${comp?.name || rec.competency}</h3>
                         <p style="margin: 0 0 10px 0;"><strong>Puntuación Actual:</strong> ${rec.score}/10</p>
                         
                         <h4 style="margin: 15px 0 10px 0; color: #667eea;">🌐 Recursos Web Recomendados:</h4>
-                        <ul style="margin: 0 0 10px 0;">
-                            ${rec.webs.map(url => `<li style="margin-bottom: 5px;"><a href="${url}" style="color: #667eea;">${url}</a></li>`).join('')}
-                        </ul>
+                        <ul style="margin: 0 0 10px 0;">${websHtml || '<li>No disponible</li>'}</ul>
                         
                         <h4 style="margin: 15px 0 10px 0; color: #667eea;">📱 Aplicaciones Útiles:</h4>
-                        <ul style="margin: 0 0 10px 0;">
-                            ${rec.apps.map(app => `<li style="margin-bottom: 5px;">${app}</li>`).join('')}
-                        </ul>
+                        <ul style="margin: 0 0 10px 0;">${appsHtml || '<li>No disponible</li>'}</ul>
                         
                         <h4 style="margin: 15px 0 10px 0; color: #667eea;">🎥 Videos Educativos:</h4>
-                        <ul style="margin: 0;">
-                            ${rec.videos.map(url => `<li style="margin-bottom: 5px;"><a href="${url}" style="color: #667eea;">${url}</a></li>`).join('')}
-                        </ul>
+                        <ul style="margin: 0 0 10px 0;">${videosHtml || '<li>No disponible</li>'}</ul>
+                        
+                        <h4 style="margin: 15px 0 10px 0; color: #667eea;">💼 Trabajos Temporales:</h4>
+                        <ul style="margin: 0;">${trabajosHtml || '<li>No disponible</li>'}</ul>
                     </div>
                 `;
             }).join('')}
