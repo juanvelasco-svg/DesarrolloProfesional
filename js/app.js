@@ -111,8 +111,7 @@ const recommendationsDB = {
         ],
         apps: [
             { name: 'Habilidades Sociales', url: 'https://play.google.com/store/apps/details/Habilidades_Sociales?id=com.fasabeteam.habilidadessociales&hl=es_PE', objective: 'Conceptos Actuales' },
-            { name: 'Social Skills', url: 'https://play.google.com/store/apps/details?id=in.softecks.socialskills&hl=es_PE', objective: 'Aprendizaje Completo' },
-            { name: 'TED', url: 'https://ted.com', objective: 'Charlas inspiradoras sobre comunicación' }
+            { name: 'Social Skills', url: 'https://play.google.com/store/apps/details?id=in.softecks.socialskills&hl=es_PE', objective: 'Aprendizaje Completo' }
         ],
         videos: [
             { name: 'TED - El poder de la vulnerabilidad - Brené Brown', url: 'https://www.ted.com/talks/brene_brown_the_power_of_vulnerability', objective: 'Comprender conexión humana' },
@@ -126,13 +125,11 @@ const recommendationsDB = {
     trabajo_equipo: {
         webs: [
             { name: 'LinkedIn Learning - Teamwork', url: 'https://www.linkedin.com/learning/topics/teamwork', objective: 'Trabajo en equipo efectivo' },
-            { name: 'Skillshare - Teamwork', url: 'https://www.skillshare.com/browse/teamwork', objective: 'Colaboración en proyectos' },
-            { name: 'MindTools - Team Building', url: 'https://www.mindtools.com/pages/main/mnuTeamBuilding.asp', objective: 'Dinámicas de grupo' }
+            { name: 'UPValencia Trabajo en equipo', url: 'https://www.edx.org/learn/remote-work/universitat-politecnica-de-valencia-trabajo-en-equipo-en-entornos-presenciales-remotos-e-hibridos', objective: 'Trabajo en equipo (gratis audit course' }
         ],
         apps: [
-            { name: 'Trello', url: 'https://trello.com', objective: 'Gestión colaborativa de tareas' },
-            { name: 'Slack', url: 'https://slack.com', objective: 'Comunicación en equipo' },
-            { name: 'Microsoft Teams', url: 'https://teams.microsoft.com', objective: 'Colaboración empresarial' }
+            { name: 'Trello', url: 'https://play.google.com/store/apps/details?id=com.trello&hl=es_PE', objective: 'Gestión colaborativa de tareas' },
+            { name: 'Microsoft Teams', url: 'https://play.google.com/store/apps/details?id=com.microsoft.teams&hl=es_PE', objective: 'Colaboración empresarial' }
         ],
         videos: [
             { name: 'TED - La importancia del trabajo en equipo', url: 'https://www.youtube.com/watch?v=5qap5aO4i9A', objective: 'Valor de la colaboración' },
@@ -145,14 +142,15 @@ const recommendationsDB = {
     },
     resolucion_problemas: {
         webs: [
-            { name: 'Khan Academy - Algoritmos', url: 'https://www.khanacademy.org/computing/computer-science/algorithms', objective: 'Pensamiento algorítmico' },
-            { name: 'Brighter Mondays - Problem Solving', url: 'https://www.brightermondays.com/problem-solving/', objective: 'Técnicas de resolución' },
-            { name: 'Psychology Today - Problem Solving', url: 'https://www.psychologytoday.com/us/basics/problem-solving', objective: 'Enfoque psicológico' }
+            { name: 'Cursos edX', url: 'https://www.edx.org/es/aprende/solucion-de-problemas', objective: 'Soluciones Razonadas' },
+            { name: 'Oxford - Problem Solving', url: 'https://www.oxfordhomestudy.com/free-problem-solving-courses', objective: 'Pensamiento Critico' },
+            { name: 'Cursos MIT', url: 'https://globalalumni.xpro.mit.edu/es/curso-online/critical-thinking/', objective: 'Razonamiento Analitico' },
+            { name: 'Psychology Today - Problem Solving', url: 'https://www.psychologytoday.com/us/blog/a-deeper-wellness/202307/problem-solving-understanding-and-dealing-with-challenges', objective: 'Enfoque psicológico' }
         ],
         apps: [
-            { name: 'Lumosity', url: 'https://lumosity.com', objective: 'Entrenamiento cognitivo' },
-            { name: 'Elevate', url: 'https://elevateapp.com', objective: 'Mejorar procesamiento mental' },
-            { name: 'Peak', url: 'https://peak.net', objective: 'Retos mentales diarios' }
+            { name: 'Neuro Nation', url: 'https://play.google.com/store/apps/details?id=air.nn.mobile.app.main&hl=es', objective: 'Ejercicos Mentales' },
+            { name: 'Mind Master', url: 'https://play.google.com/store/apps/details?id=com.appsynergy.mindmaster', objective: 'Entrena tu mente' },
+            { name: 'Critical Thinking Coach', url: 'https://play.google.com/store/apps/details?id=com.critical.thinking.coach&hl=es_PE', objective: 'Retos mentales diarios' }
         ],
         videos: [
             { name: 'TED - Resuelve problemas bajo presión', url: 'https://www.youtube.com/watch?v=WzxUDrXv3fA', objective: 'Estrategias rápidas' },
