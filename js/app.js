@@ -814,26 +814,25 @@ function generatePDF() {
     // Ensure recommendations are displayed
     displayRecommendations();
     
-    // Create a clone of the content for PDF
+    // Create a clone of the content for PDF - VISIBLE element
     const element = document.createElement('div');
     element.style.padding = '20px';
     element.style.background = 'white';
     element.style.width = '800px';
-    element.style.position = 'fixed';
+    element.style.position = 'absolute';
     element.style.top = '0';
-    element.style.left = '0';
-    element.style.zIndex = '-9999';
-    element.style.visibility = 'hidden';
+    element.style.left = '-9999px';
+    element.style.zIndex = '9999';
     
-    // Header
+    // Header - Black and white version
     element.innerHTML = `
-        <div style="text-align: center; margin-bottom: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 10px;">
+        <div style="text-align: center; margin-bottom: 30px; background: #000; color: #fff; padding: 30px; border-radius: 10px;">
             <h1 style="margin: 0; font-size: 28px;">🚀 Desarrollo Personal - Alcanzando Metas 2026</h1>
             <p style="margin: 10px 0 0 0; font-size: 16px;">Reporte de Resultados</p>
         </div>
         
-        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-            <h2 style="color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px;">👤 Datos del Participante</h2>
+        <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #000;">
+            <h2 style="color: #000; border-bottom: 3px solid #000; padding-bottom: 10px;">👤 Datos del Participante</h2>
             <p><strong>Nombre:</strong> ${state.personalData.name}</p>
             <p><strong>Edad:</strong> ${state.personalData.age} años</p>
             <p><strong>Metas de Vida:</strong> ${state.goals.lifeGoals}</p>
@@ -842,20 +841,19 @@ function generatePDF() {
             <p><strong>Roles:</strong> ${state.goals.roles.join(', ')}</p>
         </div>
         
-        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-            <h2 style="color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px;">📊 Resultados del Test</h2>
+        <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #000;">
+            <h2 style="color: #000; border-bottom: 3px solid #000; padding-bottom: 10px;">📊 Resultados del Test</h2>
             <div style="margin: 20px 0;">
                 ${Object.entries(state.testResults).map(([compId, score]) => {
                     const comp = competencies.find(c => c.id === compId);
-                    const color = score < 6 ? '#dc3545' : score >= 7 ? '#28a745' : '#ffc107';
                     return `
                         <div style="margin-bottom: 15px;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
                                 <strong>${comp?.name || compId}</strong>
-                                <strong style="color: ${color};">${score}/10</strong>
+                                <strong>${score}/10</strong>
                             </div>
-                            <div style="background: #e9ecef; height: 20px; border-radius: 10px; overflow: hidden;">
-                                <div style="background: ${color}; height: 100%; width: ${score * 10}%; transition: width 0.3s;"></div>
+                            <div style="background: #ddd; height: 20px; border-radius: 10px; overflow: hidden; border: 1px solid #000;">
+                                <div style="background: ${score < 6 ? '#000' : '#666'}; height: 100%; width: ${score * 10}%;"></div>
                             </div>
                         </div>
                     `;
@@ -864,16 +862,17 @@ function generatePDF() {
         </div>
     `;
     
-    // Add chart canvas for PDF
+    // Add chart canvas for PDF - Black and white version
     const chartContainer = document.createElement('div');
     chartContainer.style.marginBottom = '20px';
-    chartContainer.style.background = '#f8f9fa';
+    chartContainer.style.background = '#f0f0f0';
     chartContainer.style.padding = '20px';
     chartContainer.style.borderRadius = '10px';
+    chartContainer.style.border = '2px solid #000';
     
     const chartTitle = document.createElement('h2');
-    chartTitle.style.color = '#667eea';
-    chartTitle.style.borderBottom = '3px solid #667eea';
+    chartTitle.style.color = '#000';
+    chartTitle.style.borderBottom = '3px solid #000';
     chartTitle.style.paddingBottom = '10px';
     chartTitle.style.marginBottom = '20px';
     chartTitle.textContent = '📈 Gráfico de Competencias';
@@ -900,10 +899,10 @@ function generatePDF() {
                 datasets: [{
                     label: 'Tus Resultados',
                     data: competencies.map(c => state.testResults[c.id] || 0),
-                    backgroundColor: 'rgba(102, 126, 234, 0.3)',
-                    borderColor: 'rgba(102, 126, 234, 1)',
+                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                    borderColor: 'rgba(0, 0, 0, 1)',
                     borderWidth: 3,
-                    pointBackgroundColor: 'rgba(102, 126, 234, 1)',
+                    pointBackgroundColor: 'rgba(0, 0, 0, 1)',
                     pointBorderColor: '#fff',
                     pointBorderWidth: 2,
                     pointRadius: 5
@@ -917,11 +916,11 @@ function generatePDF() {
                         suggestedMin: 0,
                         suggestedMax: 10,
                         ticks: { stepSize: 2, backdropColor: 'transparent' },
-                        grid: { color: 'rgba(0, 0, 0, 0.1)' },
-                        angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                        grid: { color: 'rgba(0, 0, 0, 0.3)' },
+                        angleLines: { color: 'rgba(0, 0, 0, 0.3)' },
                         pointLabels: {
                             font: { size: 12, weight: 'bold' },
-                            color: '#333'
+                            color: '#000'
                         }
                     }
                 },
@@ -930,7 +929,7 @@ function generatePDF() {
                         position: 'top',
                         labels: {
                             font: { size: 14, weight: 'bold' },
-                            color: '#333'
+                            color: '#000'
                         }
                     },
                     tooltip: {
@@ -942,10 +941,10 @@ function generatePDF() {
         
         // Wait for chart to fully render
         setTimeout(() => {
-            // Add recommendations with complete format
+            // Add recommendations with complete format - Black and white version
             element.innerHTML += `
-                <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                    <h2 style="color: #856404; border-bottom: 3px solid #856404; padding-bottom: 10px;">💡 Plan de Acción Personalizado</h2>
+                <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #000;">
+                    <h2 style="color: #000; border-bottom: 3px solid #000; padding-bottom: 10px;">💡 Plan de Acción Personalizado</h2>
                     <p style="margin-bottom: 20px;"><strong>Enfoque:</strong> Mejorar las siguientes competencias clave para alcanzar tus metas</p>
                     
                     ${state.recommendations.map(rec => {
@@ -956,7 +955,7 @@ function generatePDF() {
                         if (rec.webs && Array.isArray(rec.webs)) {
                             websHtml = rec.webs.map(w => 
                                 `<li style="margin-bottom: 5px;">
-                                    <a href="${w.url}" style="color: #667eea;">${w.name}</a> - ${w.objective}
+                                    <a href="${w.url}" style="color: #0066cc; text-decoration: underline;">${w.name}</a> - ${w.objective}
                                 </li>`
                             ).join('');
                         }
@@ -976,7 +975,7 @@ function generatePDF() {
                         if (rec.videos && Array.isArray(rec.videos)) {
                             videosHtml = rec.videos.map(v => 
                                 `<li style="margin-bottom: 5px;">
-                                    <a href="${v.url}" style="color: #667eea;">${v.name}</a> - ${v.objective}
+                                    <a href="${v.url}" style="color: #0066cc; text-decoration: underline;">${v.name}</a> - ${v.objective}
                                 </li>`
                             ).join('');
                         }
@@ -992,27 +991,27 @@ function generatePDF() {
                         }
                         
                         return `
-                            <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #ffc107;">
-                                <h3 style="color: #856404; margin: 0 0 10px 0;">${comp?.name || rec.competency}</h3>
+                            <div style="background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #000; border: 1px solid #000;">
+                                <h3 style="color: #000; margin: 0 0 10px 0;">${comp?.name || rec.competency}</h3>
                                 <p style="margin: 0 0 10px 0;"><strong>Puntuación Actual:</strong> ${rec.score}/10</p>
                                 
-                                <h4 style="margin: 15px 0 10px 0; color: #667eea;">🌐 Recursos Web Recomendados:</h4>
+                                <h4 style="margin: 15px 0 10px 0; color: #000;">🌐 Recursos Web Recomendados:</h4>
                                 <ul style="margin: 0 0 10px 0;">${websHtml || '<li>No disponible</li>'}</ul>
                                 
-                                <h4 style="margin: 15px 0 10px 0; color: #667eea;">📱 Aplicaciones Útiles:</h4>
+                                <h4 style="margin: 15px 0 10px 0; color: #000;">📱 Aplicaciones Útiles:</h4>
                                 <ul style="margin: 0 0 10px 0;">${appsHtml || '<li>No disponible</li>'}</ul>
                                 
-                                <h4 style="margin: 15px 0 10px 0; color: #667eea;">🎥 Videos Educativos:</h4>
+                                <h4 style="margin: 15px 0 10px 0; color: #000;">🎥 Videos Educativos:</h4>
                                 <ul style="margin: 0 0 10px 0;">${videosHtml || '<li>No disponible</li>'}</ul>
                                 
-                                <h4 style="margin: 15px 0 10px 0; color: #667eea;">💼 Trabajos Temporales:</h4>
+                                <h4 style="margin: 15px 0 10px 0; color: #000;">💼 Trabajos Temporales:</h4>
                                 <ul style="margin: 0;">${trabajosHtml || '<li>No disponible</li>'}</ul>
                             </div>
                         `;
                     }).join('')}
                 </div>
                 
-                <div style="text-align: center; margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 10px;">
+                <div style="text-align: center; margin-top: 30px; padding: 20px; background: #000; color: #fff; border-radius: 10px;">
                     <h3 style="margin: 0;">¡Tu futuro comienza hoy!</h3>
                     <p style="margin: 10px 0 0 0;">Usa estos recursos para desarrollar tus competencias y alcanzar tus metas.</p>
                     <p style="margin: 10px 0 0 0; font-size: 12px;">Generado el ${new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
